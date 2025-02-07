@@ -50,7 +50,7 @@ This project follows **Atomic Design principles** while integrating with **Chakr
 ---
 
 ## 📂 Project Structure
-
+```
 📦 src/
 │
 ├── 📂 assets
@@ -118,7 +118,7 @@ This project follows **Atomic Design principles** while integrating with **Chakr
 📜 vite.config.ts
 📜 package.json
 📜 README.md
-
+```
 
 ---
 

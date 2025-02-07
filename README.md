@@ -43,68 +43,69 @@ A scalable and reusable UI component library built with **Chakra UI** and **Stor
 
 This project follows **Atomic Design principles** while integrating with **Chakra 3** and **Storybook 8**. It organizes UI components in a scalable, modular structure to improve maintainability and flexibility.
 
+
 ---
 
 ## 📂 Project Structure
 
 ```
-src/
+📦 src/
 │
-├── assets/
-│   ├── icons/
+├── 📂 assets
+│   ├── 📂 icons
 │   │   ├── search.svg
 │   │   ├── checkmark.svg
-│   ├── images/
+│   ├── 📂 images
 │   │   ├── logo.png
 │
-├── components/
-│   ├── atoms/
+├── 📂 components
+│   ├── 📂 atoms
 │   │   ├── Button.tsx
 │   │   ├── Icon.tsx
 │   │   ├── Input.tsx
-│   ├── molecules/
+│   ├── 📂 molecules
 │   │   ├── SidebarItem.tsx
 │   │   ├── NavbarItem.tsx
-│   ├── organisms/
+│   ├── 📂 organisms
 │   │   ├── Sidebar.tsx
 │   │   ├── Navbar.tsx
 │   │   ├── Footer.tsx
 │
-├── layouts/
+├── 📂 layouts
 │   ├── AdminLayout.tsx
 │   ├── AuthLayout.tsx
 │
-├── views/
+├── 📂 views
 │   ├── Dashboard.tsx
 │   ├── Billing.tsx
 │   ├── Profile.tsx
 │
-├── stories/
+├── 📂 stories
 │   ├── Sidebar.stories.tsx
 │   ├── Button.stories.tsx
 │
-├── theme/
+├── 📂 theme
 │   ├── index.ts
 │   ├── colors.ts
 │   ├── typography.ts
 │
-├── context/
+├── 📂 context
 │   ├── ThemeContext.tsx
 │   ├── SidebarContext.tsx
 │
-├── hooks/
+├── 📂 hooks
 │   ├── useSidebar.ts
 │   ├── useTheme.ts
 │
-├── utils/
+├── 📂 utils
 │   ├── helpers.ts
 │   ├── constants.ts
 │
-├── config/
+├── 📂 config
 │   ├── routes.ts
 │   ├── api.ts
 │
-├── .storybook/
+├── 📂 .storybook
 │   ├── main.ts
 │   ├── preview.ts
 │   ├── manager.ts
@@ -126,4 +127,9 @@ src/
 ✅ **Argon Dashboard Chakra Components:** Fully integrated with the design system.\
 ✅ **Chakra UI Theme Support:** Custom theme files (`theme/`) for consistent styling.\
 ✅ **Reusable Hooks & Context API:** State management for sidebar, theme, and authentication.
+
+# 🚀 Argon Dashboard Chakra + Atomic Design + Storybook 8
+
+This project follows **Atomic Design principles** while integrating with **Argon Dashboard Chakra** and **Storybook 8**. It organizes UI components in a scalable, modular structure to improve maintainability and flexibility.
+
 

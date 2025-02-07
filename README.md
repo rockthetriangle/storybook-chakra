@@ -1,3 +1,4 @@
+
 # SAT Common Component Library
 
 A scalable and reusable UI component library built with **Chakra UI** and **Storybook**, designed to enhance development productivity and ensure consistent UI design.
@@ -23,21 +24,23 @@ A scalable and reusable UI component library built with **Chakra UI** and **Stor
 1. Clone the repository:
    ```
    git clone https://github.com/rockthetriangle/common-ui.git
-   cd common-ui	```
+   cd common-ui
    
 2. Install dependencies:
    ```
-   npm install	```
+   npm install
    
 3. Start Storybook:
    ```
-   npm run storybook	```
+   npm run storybook	
    
 ## Project Structure
  
 ## Testing
+  
    ```
-   npm test	```
+   npm test
+   ```
    
 # 🚀 Chakra 3 + Atomic Design + Storybook 8
 
@@ -48,7 +51,6 @@ This project follows **Atomic Design principles** while integrating with **Chakr
 
 ## 📂 Project Structure
 
-```
 📦 src/
 │
 ├── 📂 assets
@@ -116,7 +118,7 @@ This project follows **Atomic Design principles** while integrating with **Chakr
 📜 vite.config.ts
 📜 package.json
 📜 README.md
-```
+
 
 ---
 

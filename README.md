@@ -21,22 +21,22 @@ A scalable and reusable UI component library built with **Chakra UI** and **Stor
 ### Installation
 
 1. Clone the repository:
-   ```bash
+   ```
    git clone https://github.com/rockthetriangle/common-ui.git
    cd common-ui	```
    
 2. Install dependencies:
-   ```bash
+   ```
    npm install	```
    
 3. Start Storybook:
-   ```bash
+   ```
    npm run storybook	```
    
 ## Project Structure
  
 ## Testing
-   ```bash
+   ```
    npm test	```
    
 # 🚀 Chakra 3 + Atomic Design + Storybook 8

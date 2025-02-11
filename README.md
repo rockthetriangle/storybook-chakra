@@ -121,7 +121,8 @@ This project follows **Atomic Design principles** while integrating with **Chakr
 📜 package.json
 📜 README.md
 └── theme/
-    └── index.ts
+    └── theme.ts
+    
 ```
 
 ---

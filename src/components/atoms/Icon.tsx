@@ -7,7 +7,7 @@ interface IconProps {
   color?: string;
 }
 
-const Icon = ({ name, size = "24px", color = "currentColor" }: IconProps) => {
+const Icons = ({ name, size = "24px", color = "currentColor" }: IconProps) => {
   const iconSrc = ICONS[name];
 
   if (!iconSrc) return null;
@@ -19,4 +19,4 @@ const Icon = ({ name, size = "24px", color = "currentColor" }: IconProps) => {
   );
 };
 
-export default Icon;
+export default Icons;

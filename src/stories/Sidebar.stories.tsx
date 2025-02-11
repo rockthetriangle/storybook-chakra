@@ -1,25 +1,41 @@
-// src/stories/Sidebar.stories.tsx
-import Sidebar from "../components/organisms/Sidebar";
-import ICONS from "../icons/icons";
+import SidebarMenu from "../components/molecules/SidebarMenu";
 import { Meta, StoryObj } from "@storybook/react";
+import { Box } from "@chakra-ui/react";
 
-const meta: Meta<typeof Sidebar> = {
-  title: "Organisms/Sidebar",
-  component: Sidebar,
+const meta: Meta<typeof SidebarMenu> = {
+  title: "Molecules/SidebarMenu",
+  component: SidebarMenu,
   argTypes: {
-    items: {
-      control: "object",
+    themeMode: {
+      control: "radio",
+      options: ["light", "dark"],
+      defaultValue: "light",
     },
   },
 };
 
 export default meta;
 
-export const Default: StoryObj<typeof Sidebar> = {
+export const Interactive: StoryObj<typeof SidebarMenu> = {
   args: {
-    items: [
-      { name: "house", label: "Home" },
-      { name: "buildings", label: "Clearances" },
-    ],
+    themeMode: "light",
   },
+  render: ({ themeMode }) => (
+    <Box
+      bg={themeMode === "dark" ? "#1A202C" : "white"}
+      p={4}
+      display="flex"
+      justifyContent="center"
+      alignItems="center"
+      height="30vh"
+    >
+      <SidebarMenu
+        themeMode={themeMode}
+        items={[
+          { name: "HouseIcon", label: "Home", isActive: true },
+          { name: "LandmarkIcon", label: "Clearances" },
+        ]}
+      />
+    </Box>
+  ),
 };

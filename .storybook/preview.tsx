@@ -1,5 +1,8 @@
 import type { Preview } from "@storybook/react";
-import { ChakraProvider, defaultSystem } from "@chakra-ui/react";
+import { withThemeByClassName } from "@storybook/addon-themes";
+import { ChakraProvider } from "@chakra-ui/react";
+import { theme } from "../src/theme/theme"; // Import your custom theme
+import { ColorModeProvider } from "../src/components/ui/color-mode";
 
 const preview: Preview = {
   parameters: {
@@ -14,13 +17,17 @@ const preview: Preview = {
 
   decorators: [
     (Story) => (
-      <ChakraProvider value={defaultSystem}>
+      <ChakraProvider value={theme}> {/* Use your custom theme */}
         <Story />
       </ChakraProvider>
     ),
+    withThemeByClassName({
+      defaultTheme: "light",
+      themes: { light: "", dark: "dark" },
+    }),
   ],
-  
-  tags: ["autodocs"]
+
+  tags: ["autodocs"],
 };
 
 export default preview;

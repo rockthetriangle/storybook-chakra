@@ -50,7 +50,7 @@ This project follows **Atomic Design principles** while integrating with **Chakr
 ---
 
 ## 📂 Project Structure
-
+```
 📦 src/
 │
 ├── 📂 assets
@@ -60,18 +60,11 @@ This project follows **Atomic Design principles** while integrating with **Chakr
 │   ├── 📂 images
 │   │   ├── logo.png
 │
-├── 📂 components
-│   ├── 📂 atoms
-│   │   ├── Button.tsx
-│   │   ├── Icon.tsx
-│   │   ├── Input.tsx
-│   ├── 📂 molecules
-│   │   ├── SidebarItem.tsx
-│   │   ├── NavbarItem.tsx
-│   ├── 📂 organisms
-│   │   ├── Sidebar.tsx
-│   │   ├── Navbar.tsx
-│   │   ├── Footer.tsx
+├── 📂 components/
+│   ├── atoms/
+│   ├── molecules/
+│   ├── organisms/
+│   └── templates/
 │
 ├── 📂 layouts
 │   ├── AdminLayout.tsx
@@ -86,10 +79,19 @@ This project follows **Atomic Design principles** while integrating with **Chakr
 │   ├── Sidebar.stories.tsx
 │   ├── Button.stories.tsx
 │
-├── 📂 theme
-│   ├── index.ts
-│   ├── colors.ts
-│   ├── typography.ts
+├── styles/
+│   ├── abstracts/
+│   │   ├── _variables.scss
+│   │   ├── _mixins.scss
+│   │   └── _functions.scss
+│   ├── base/
+│   │   ├── _reset.scss
+│   │   ├── _typography.scss
+│   │   └── _utilities.scss
+│   ├── themes/
+│   │   ├── _light.scss
+│   │   └── _dark.scss
+│   └── main.scss
 │
 ├── 📂 context
 │   ├── ThemeContext.tsx
@@ -108,8 +110,8 @@ This project follows **Atomic Design principles** while integrating with **Chakr
 │   ├── api.ts
 │
 ├── 📂 .storybook
-│   ├── main.ts
-│   ├── preview.ts
+│   ├── main.mjs
+│   ├── preview.tsx
 │   ├── manager.ts
 │
 📜 App.tsx
@@ -118,7 +120,9 @@ This project follows **Atomic Design principles** while integrating with **Chakr
 📜 vite.config.ts
 📜 package.json
 📜 README.md
-
+└── theme/
+    └── index.ts
+```
 
 ---
 

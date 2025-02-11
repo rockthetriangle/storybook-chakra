@@ -1,29 +1,42 @@
-import Input from "../atoms/Input";
-import Button from "../atoms/Button";
-import Icon from "../atoms/Icon";
+import { HStack, Input, Button } from "@chakra-ui/react";
+import { InputGroup } from "../ui/input-group";
+import { Search } from "react-feather";
 
 interface SearchInputProps {
-  withButton?: boolean;
   placeholder?: string;
+  inputBg?: string;
+  inputColor?: string;
+  buttonBg?: string;
+  buttonColor?: string;
 }
 
-const SearchInput = ({ withButton = true, placeholder }: SearchInputProps) => (
-  <div className="flex w-full border border-gray-300 rounded-md dark:bg-gray-800 overflow-hidden">
-    {/* Left-aligned Magnifying Glass Icon */}
-    <div className="p-2">
-      <Icon name="search" size="20px" color="gray" />
-    </div>
+const SearchInput: React.FC<SearchInputProps> = ({
+  placeholder = "Search...",
+  inputBg = "white",
+  inputColor = "black",
+  buttonBg = "#cc0000",
+  buttonColor = "white",
+}) => {
+  return (
+    <HStack gap="4" width="full">
+      <InputGroup flex="1" startElement={<Search size={18} />}>
+        <Input 
+          placeholder={placeholder} 
+          bg={inputBg} 
+          color={inputColor} 
+        />
+      </InputGroup>
 
-    {/* Input Field */}
-    <Input placeholder={placeholder} />
-
-    {/* Right-aligned Search Button */}
-    {withButton && (
-      <Button className="px-4 py-2 bg-blue-500 text-white rounded-r-md hover:bg-blue-600">
+      <Button 
+        bg={buttonBg} 
+        color={buttonColor} 
+        radius={3}
+        _hover={{ bg: buttonBg === "#cc0000" ? "#a00000" : "#d9d9d9" }}
+      >
         Search
       </Button>
-    )}
-  </div>
-);
+    </HStack>
+  );
+};
 
 export default SearchInput;

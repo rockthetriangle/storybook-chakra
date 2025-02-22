@@ -43,7 +43,7 @@ export const Interactive: StoryObj<typeof SideMenuPanel> = {
   							height="100vh"
   							bg={themeMode === "dark" ? "#1A202C" : "white"}
 							>
-  							<SideMenuPanel themeMode={themeMode} />
+  						<SideMenuPanel themeMode={themeMode} />
 							</Box>`,
         language: "tsx", // Ensure syntax highlighting for TypeScript
       },

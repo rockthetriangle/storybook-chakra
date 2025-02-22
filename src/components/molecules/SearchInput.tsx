@@ -17,6 +17,8 @@ const SearchInput: React.FC<SearchInputProps> = ({
   buttonBg = "#cc0000",
   buttonColor = "white",
 }) => {
+  console.log("🛠️ SearchInput Props: ", { inputBg, inputColor, buttonBg, buttonColor });
+
   return (
     <HStack gap="4" width="full">
       <InputGroup flex="1" startElement={<Search size={18} />}>

@@ -33,7 +33,7 @@ export const Interactive: StoryObj<typeof SidebarMenu> = {
         themeMode={themeMode}
         items={[
           { name: "HouseIcon", label: "Home", isActive: true },
-          { name: "LandmarkIcon", label: "Clearances" },
+          { name: "LandmarkIcon", label: "Places" },
         ]}
       />
     </Box>

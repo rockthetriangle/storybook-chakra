@@ -1,8 +1,9 @@
 import React from "react";
-import { Meta, StoryFn } from "@storybook/react";
+import { Meta } from "@storybook/react";
 import { Box } from "@chakra-ui/react";
 import Icons from "../components/atoms/icon/Icons";
 import IconBox from "../components/atoms/icon/IconBox";
+import { theme } from "@/providers/ThemeProvider";
 
 console.log("Available Icons:", Object.keys(Icons));
 
@@ -24,27 +25,30 @@ export default {
   },
 } as Meta;
 
-const colorMap = {
-  primary: "#CC0000", // Wolfpack Red
-  active: "#FFFFFF",  // White (Default)
-  dark: "#002438",    // Dark mode
-};
+export const Default = ({ iconName, size, boxColor, showBox, iconColor }) => {
+  if (!theme || !theme.token) {
+    return <Box color="red.500">Error: Theme not loaded properly</Box>;
+  }
 
-const Template = ({ iconName, size, boxColor, showBox, iconColor }) => {
+  const colorTokens = {
+    primary: theme.token("colors.red.500", "#CC0000"), // Wolfpack Red
+    active: theme.token("colors.gray.100", "#FFFFFF"), // White
+    dark: theme.token("colors.blue.900", "#002438"), // Dark mode
+  };
+
   console.log(`Rendering IconBox with icon: ${iconName}, color: ${iconColor}, size: ${size}`);
 
   return (
     <IconBox
       iconName={iconName}
       size={size}
-      color={colorMap[iconColor] || colorMap.primary}
+      color={colorTokens[iconColor] || colorTokens.primary}
       backgroundColor={showBox ? boxColor : "transparent"}
       padding={showBox ? "10px" : "0px"}
     />
   );
 };
 
-export const Default = Template.bind({});
 Default.args = {
   iconName: "HouseIcon",
   size: 25,

@@ -1,10 +1,12 @@
-import { Provider } from "./components/ui/provider";
-import { theme } from "./theme/theme";
+// App
+import Provider from "@/providers/ThemeProvider"
 
-export const App = ({ Component, pageProps }) => (
-  <Provider theme={theme}>
-    <Component {...pageProps} />
-  </Provider>
-);
+function App({ Component, pageProps }) {
+  return (
+    <Provider>
+      	<Component {...pageProps} />
+    </Provider>
+  );
+}
 
 export default App;

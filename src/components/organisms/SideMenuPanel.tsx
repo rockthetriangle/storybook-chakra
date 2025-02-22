@@ -22,7 +22,7 @@ const SideMenuPanel: React.FC<SideMenuPanelProps> = ({ themeMode = "light" }) =>
       <Flex align="center" mb={4}>
         <WolfIcon boxSize="29px" color="#cc0000" />
         <Text fontSize="xl" fontWeight="bold" ml={2}>
-          SAT
+          Logo
         </Text>
       </Flex>
 
@@ -31,8 +31,8 @@ const SideMenuPanel: React.FC<SideMenuPanelProps> = ({ themeMode = "light" }) =>
         themeMode={themeMode}
         items={[
           { name: "HouseIcon", label: "Home", isActive: true },
-          { name: "LandmarkIcon", label: "Clearance" },
-          { name: "LeaderIcon", label: "Liaison" },
+          { name: "LandmarkIcon", label: "Places" },
+          { name: "LeaderIcon", label: "People" },
           { name: "ProfileIcon", label: "Profile" },
           { name: "ToolsIcon", label: "Settings" },
           { name: "ArrowsIcon", label: "Sign Out" },

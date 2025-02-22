@@ -1,6 +1,5 @@
-// src/stories/SearchInput.stories.tsx
 import { Meta, StoryObj } from "@storybook/react";
-import { Box } from "@chakra-ui/react";
+import { Box, useToken } from "@chakra-ui/react";
 import SearchInput from "../components/molecules/SearchInput";
 
 const meta: Meta<typeof SearchInput> = {
@@ -23,22 +22,31 @@ export const Interactive: StoryObj<typeof SearchInput> = {
     placeholder: "Search by Unity ID or Campus ID", 
     themeMode: "light",
   },
-  render: ({ placeholder, themeMode }) => (
-    <Box 
-      bg={themeMode === "dark" ? "#12394D" : "white"} 
-      p={4} 
-      display="flex" 
-      justifyContent="center" 
-      alignItems="center"
-      height="20vh"
-    >
-      <SearchInput 
-        placeholder={placeholder} 
-        inputBg={themeMode === "dark" ? "#12394D" : "white"} 
-        inputColor={themeMode === "dark" ? "#F1F1F1" : "black"}
-        buttonBg={themeMode === "dark" ? "#F1F1F1" : "#cc0000"}
-        buttonColor={themeMode === "dark" ? "#333333" : "white"}
-      />
-    </Box>
-  ),
+  render: ({ placeholder, themeMode }) => {
+    const [bgLight, bgDark] = useToken("colors", ["gray.50", "gray.800"]);
+    const [textLight, textDark] = useToken("colors", ["gray.900", "white"]);
+    const [buttonLight, buttonDark] = useToken("colors", ["red.500", "red.300"]);
+    const [hoverLight, hoverDark] = useToken("colors", ["red.600", "red.400"]);
+		console.log("🎨 Debug Theme Tokens: ", {
+      bgLight, bgDark, textLight, textDark, buttonLight, buttonDark, hoverLight, hoverDark
+    });
+    return (
+      <Box 
+        bg={themeMode === "dark" ? bgDark : bgLight} 
+        p={4} 
+        display="flex" 
+        justifyContent="center" 
+        alignItems="center"
+        height="20vh"
+      >
+        <SearchInput 
+          placeholder={placeholder} 
+          inputBg={themeMode === "dark" ? bgDark : bgLight}
+          inputColor={themeMode === "dark" ? textDark : textLight}
+          buttonBg={themeMode === "dark" ? buttonDark : buttonLight}
+          buttonColor={themeMode === "dark" ? textDark : textLight}
+        />
+      </Box>
+    );
+  },
 };

@@ -4,7 +4,7 @@ export const inputStyles = {
       Input: {
         baseStyle: {
           field: {
-            fontWeight: { value: 400 },
+            fontWeight: { value: 500 },
           },
         },
 
@@ -25,7 +25,7 @@ export const inputStyles = {
       colors: {
         inputBg: {
           default: { value: "white" },
-          _dark: { value: "navy.700" },
+          _dark: { value: "red.700" },
         },
       },
     },

@@ -1,5 +1,5 @@
 
-# SAT Common Component Library
+# Common Component Library
 
 A scalable and reusable UI component library built with **Chakra UI** and **Storybook**, designed to enhance development productivity and ensure consistent UI design.
 
@@ -121,8 +121,7 @@ This project follows **Atomic Design principles** while integrating with **Chakr
 📜 package.json
 📜 README.md
 └── theme/
-    └── theme.ts
-    
+    └── index.ts
 ```
 
 ---

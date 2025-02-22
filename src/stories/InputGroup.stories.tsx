@@ -1,30 +1,40 @@
-// src/stories/InputGroup.stories.tsx
-import { Meta, StoryObj } from "@storybook/react";
-import { HStack, Input } from "@chakra-ui/react";
-import { InputGroup } from "../components/ui/input-group";
-import { LuUser } from "react-icons/lu";
+import type { Meta, StoryObj } from "@storybook/react";
+import { Input, Kbd } from "@chakra-ui/react";
+import { LuSearch } from "react-icons/lu";
+import * as React from "react";
+import { InputGroup, InputGroupProps } from "@/components/Chakra/input-group";
 
-const meta: Meta = {
+const meta: Meta<typeof InputGroup> = {
   title: "Molecules/InputGroup",
   component: InputGroup,
+  parameters: {
+    layout: "centered",
+  },
   argTypes: {
     startElement: { control: "text" },
-    placeholder: { control: "text" },
+    endElement: { control: "text" },
   },
 };
 
 export default meta;
+type Story = StoryObj<typeof InputGroup>;
 
-export const Demo: StoryObj = {
-  render: () => (
-    <HStack gap="10" width="full">
-      <InputGroup flex="1" startElement={<LuUser />}>
-        <Input placeholder="Username" />
-      </InputGroup>
+export const SearchInput: Story = {
+  args: {
+    startElement: <LuSearch />,
+    endElement: <Kbd>⌘K</Kbd>,
+    children: <Input placeholder="Search contacts" />,
+  },
+  render: (args) => {
+    console.log("SearchInput Props:", args);
+    return <InputGroup {...args} />;
+  },
+};
 
-      <InputGroup flex="1" startElement="https://">
-        <Input ps="4.75em" placeholder="yoursite.com" />
-      </InputGroup>
-    </HStack>
-  ),
+export const UrlInput: Story = {
+  args: {
+    startElement: "https://",
+    endElement: <Kbd>.com</Kbd>,
+    children: <Input placeholder="yoursite.com" />,
+  },
 };

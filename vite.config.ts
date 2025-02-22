@@ -1,17 +1,10 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
-import svgr from "vite-plugin-svgr";
+import tsconfigPaths from "vite-tsconfig-paths";
 
-// Enable Chakra UI debugging
-process.env.DEBUG = "chakra";
-
-// https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(), svgr()],
+  plugins: [react(), tsconfigPaths()],
   optimizeDeps: {
     include: ["@chakra-ui/react"],
-  },
-  css: {
-    postcss: {},
   },
 });

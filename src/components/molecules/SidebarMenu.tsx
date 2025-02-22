@@ -1,6 +1,6 @@
 // src/components/organisms/SidebarMenu.tsx
 import { Box } from "@chakra-ui/react";
-import MenuItem from "./MenuItem";
+import MenuItem from "../molecules/MenuItem";
 import Icons from "../atoms/icon/Icons";
 
 interface SidebarMenuProps {

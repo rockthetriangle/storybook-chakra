@@ -2,26 +2,34 @@ import { defineRecipe } from "@chakra-ui/react";
 
 export const buttonRecipe = defineRecipe({
   base: {
-    fontWeight: { value: "bold" },
-    borderRadius: { value: "8px" },
-    fontSize: { value: "10px" },
+    fontWeight: "bold",
+    borderRadius: "8px",
+    padding: "8px 16px",
   },
   variants: {
-    primary: {
-      fontSize: { value: "10px" },
-      bg: "{colors.primaryButtonBg}",
-      color: "{colors.primaryButtonText}",
-      _hover: { bg: "{colors.primaryButtonHover}" },
-      _focus: { bg: "{colors.primaryButtonHover}" },
-      _active: { bg: "{colors.primaryButtonHover}" },
+    solid: (props) => {
+      const { colorPalette } = props;
+      return {
+        bg: props.theme.token(`colors.${colorPalette}.500`, "gray.500"),
+        color: "white",
+        _hover: {
+          bg: props.theme.token(`colors.${colorPalette}.600`, "gray.600"),
+        },
+      };
     },
-    navy: {
-      fontSize: { value: "10px" },
-      bg: "{colors.navyButtonBg}",
-      color: "{colors.navyButtonText}",
-      _hover: { bg: "{colors.navyButtonHover}" },
-      _focus: { bg: "{colors.navyButtonHover}" },
-      _active: { bg: "{colors.navyButtonHover}" },
+    outline: (props) => {
+      const { colorPalette } = props;
+      return {
+        border: "2px solid",
+        borderColor: props.theme.token(`colors.${colorPalette}.500`, "gray.500"),
+        color: props.theme.token(`colors.${colorPalette}.500`, "gray.500"),
+        _hover: {
+          bg: props.theme.token(`colors.${colorPalette}.100`, "gray.100"),
+        },
+      };
     },
+  },
+  defaultVariants: {
+    variant: "solid",
   },
 });

@@ -116,12 +116,20 @@ const _config = defineConfig({
     semanticTokens: {
       colors: {
         background: {
-          default: { value: "{colors.gray.50}" },
-          _dark: { value: "{colors.gray.900}" },
+          default: { value: "#F1F1F1" },
+          _dark: { value: "#1E4B62" },
         },
         text: {
           default: { value: "{colors.gray.800}" },
           _dark: { value: "{colors.gray.100}" },
+        },
+        primary: {
+          default: { value: "{colors.red.200}" },
+          _dark: { value: "#002539" },
+        },
+        secondary: {
+          default: { value: "{colors.aqua.500}" },
+          _dark: { value: "{colors.aqua.200}" },
         },
       },
     },

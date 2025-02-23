@@ -1,71 +1,65 @@
-import { Button } from "@/components/Chakra/button";
-import { For, useRecipe } from "@chakra-ui/react";
+import { For, Input, useRecipe } from "@chakra-ui/react";
 import type { Meta, StoryObj } from "@storybook/react";
-import { RiArrowRightLine, RiMailLine } from "react-icons/ri";
 
 
 const meta = {
-  title: "Atoms/Button",
-  component: Button,
+  title: "Atoms/Input",
+  component: Input,
   parameters: {
     layout: "centered",
   },
   tags: ["autodocs"],
   args: {
-    children: "Button",
-    variant: "solid",
+    placeholder: "Enter text...",
+    value: "",
+    variant: "outline",
     size: "md",
-    loading: false,
-    disabled: false, 
+    disabled: false,
   },
   argTypes: {
-    children: {
+    placeholder: {
       control: "text",
-      description: "Button label content",
+      description: "Placeholder text for the input",
+    },
+    value: {
+      control: "text",
+      description: "Input value",
     },
     variant: {
       control: "select",
-      options: ["outline", "solid", "subtle", "surface", "ghost", "plain"],
-      description: "Button variant style",
+      options: ["outline", "flushed", "subtle"],
+      description: "Input variant style",
     },
     size: {
       control: "select",
-      options: ["xs", "sm", "md", "lg"],
-      description: "Button size",
-    },
-    loading: {
-      control: "boolean",
-      description: "Show loading spinner",
+      options: ["2xs", "xs", "sm", "md", "lg", "xl", "2xl"],
+      description: "Input size",
     },
     disabled: {
       control: "boolean",
-      description: "Disable button",
-    },
-    leftIcon: {
-      control: false,
-      description: "Icon component to render on the left",
-    },
-    rightIcon: {
-      control: false,
-      description: "Icon component to render on the right",
+      description: "Disable the input",
     },
   },
-} satisfies Meta<typeof Button>;
+} satisfies Meta<typeof Input>;
 
 export default meta;
-type Story = StoryObj<typeof Button>;
+type Story = StoryObj<typeof Input>;
 
+/**
+ * Basic Input example
+ */
 export const Basic: Story = {
   args: {
-    children: "Basic Button",
+    placeholder: "Enter your name",
   },
 };
+
 /**
  * Examples of different sizes
  */
 export const Sizes: Story = {
   render: (args) => {
-    const recipe = useRecipe({ key: "button" });
+    const recipe = useRecipe({ key: "input" });
     return (
       <div style={{ display: "flex", gap: "1rem", alignItems: "center" }}>
         <For each={recipe.variantMap.size}>
@@ -78,7 +72,7 @@ export const Sizes: Story = {
                 alignItems: "center",
               }}
             >
-              <Button {...args} size={size} />
+              <Input {...args} size={size} />
               <span style={{ fontSize: "0.75rem", marginTop: "0.25rem" }}>
                 {size}
               </span>
@@ -95,7 +89,7 @@ export const Sizes: Story = {
  */
 export const Variants: Story = {
   render: (args) => {
-    const recipe = useRecipe({ key: "button" });
+    const recipe = useRecipe({ key: "input" });
     return (
       <div style={{ display: "flex", gap: "1rem", alignItems: "center" }}>
         <For each={recipe.variantMap.variant}>
@@ -108,7 +102,7 @@ export const Variants: Story = {
                 alignItems: "center",
               }}
             >
-              <Button {...args} variant={variant} />
+              <Input {...args} variant={variant} />
               <span style={{ fontSize: "0.75rem", marginTop: "0.25rem" }}>
                 {variant}
               </span>
@@ -121,45 +115,12 @@ export const Variants: Story = {
 };
 
 /**
- * Loading state example
- */
-export const Loading: Story = {
-  args: {
-    children: "Loading",
-    loading: true,
-    variant: "solid",
-  },
-};
-
-/**
  * Disabled state example
  */
 export const Disabled: Story = {
   args: {
-    children: "Disabled",
-    loading: true,
-    variant: "solid",
+    placeholder: "Disabled input",
+    disabled: true,
   },
 };
 
-/**
- * Button with left icon
- */
-export const WithLeftIcon: Story = {
-  args: {
-    children: "Email",
-    leftIcon: RiMailLine,
-    variant: "solid",
-  },
-};
-
-/**
- * Button with right icon
- */
-export const WithRightIcon: Story = {
-  args: {
-    children: "Next",
-    rightIcon: RiArrowRightLine,
-    variant: "outline",
-  },
-};

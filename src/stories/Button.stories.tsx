@@ -3,7 +3,6 @@ import { For, useRecipe } from "@chakra-ui/react";
 import type { Meta, StoryObj } from "@storybook/react";
 import { RiArrowRightLine, RiMailLine } from "react-icons/ri";
 
-
 const meta = {
   title: "Atoms/Button",
   component: Button,
@@ -16,7 +15,7 @@ const meta = {
     variant: "solid",
     size: "md",
     loading: false,
-    disabled: false, 
+    disabled: false,
   },
   argTypes: {
     children: {
@@ -120,6 +119,84 @@ export const Variants: Story = {
   },
 };
 
+/**
+ * Button with colors
+ */
+export const Colors: Story = {
+  render: (args) => {
+    const colorPalettes = [
+      "gray",
+      "red",
+      "green",
+      "blue",
+      "teal",
+      "pink",
+      "purple",
+      "cyan",
+      "orange",
+      "yellow",
+    ];
+    const variants = ["outline", "solid", "subtle", "surface"] as const;
+
+    return (
+      <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
+        {/* Variant names on top */}
+        <div style={{ display: "flex", alignItems: "center", gap: "1.5rem" }}>
+          <span style={{ minWidth: "5rem" }}></span>
+          {variants.map((variant) => (
+            <div
+              key={variant}
+              style={{
+                flex: 1,
+                textAlign: "center",
+                fontSize: "0.875rem",
+                fontWeight: "500",
+              }}
+            >
+              {variant}
+            </div>
+          ))}
+        </div>
+
+        {/* Color palettes with buttons */}
+        {colorPalettes.map((colorPalette) => (
+          <div
+            key={colorPalette}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "1.5rem",
+            }}
+          >
+            <span
+              style={{
+                minWidth: "5rem",
+                fontSize: "0.875rem",
+              }}
+            >
+              {colorPalette}
+            </span>
+
+            {variants.map((variant) => (
+              <div
+                key={`${colorPalette}-${variant}`}
+                style={{
+                  flex: 1,
+                  display: "flex",
+                  justifyContent: "center",
+                }}
+              >
+                <Button {...args} colorPalette={colorPalette} variant={variant}>
+                  Button
+                </Button>
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
+    );
+  },
+};
 /**
  * Loading state example
  */

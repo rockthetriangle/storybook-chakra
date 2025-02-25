@@ -13,6 +13,8 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ children, sidebar }) => {
 
   const bgColor = useColorModeValue("white", "gray.800");
   const overlayBg = useColorModeValue("blackAlpha.200", "blackAlpha.600");
+  const menuIconBg = useColorModeValue("gray.700", "gray.100");
+  const menuIconColor = useColorModeValue("gray.100", "gray.700");
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
@@ -30,6 +32,8 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ children, sidebar }) => {
           zIndex="20"
           display={"flex"}
           onClick={toggleSidebar}
+          bg={menuIconBg}
+          color={menuIconColor}
         >
           <CiMenuBurger />
         </IconButton>

@@ -2,6 +2,7 @@ import { ColorModeProvider } from "@/components/Chakra/color-mode";
 import SearchInput from "@/components/molecules/SearchInput";
 import Sidebar from "@/components/organisms/Sidebar";
 import SidebarMenu from "@/components/organisms/SidebarMenu";
+import { useColorModeValue } from "@/components/ui/color-mode";
 import { Flex, Link, Text, useToken } from "@chakra-ui/react";
 
 export default function PortalPage({
@@ -14,6 +15,8 @@ export default function PortalPage({
     "background.default",
     "background._dark",
   ]);
+  const bgColor = useColorModeValue(bgLight, bgDark)
+  const textColor = useColorModeValue("gray.700", "gray.100");
 
   return (
     <ColorModeProvider>
@@ -29,8 +32,7 @@ export default function PortalPage({
             zIndex={10}
             padding={4}
             alignItems="center"
-            bg={bgLight}
-            _dark={{ bg: bgDark }}
+            bg={bgColor}
             transition="all 0.3s"
           >
             <SearchInput />
@@ -42,8 +44,8 @@ export default function PortalPage({
             minHeight="100vh"
             paddingTop="5rem"
             transition="margin 0.3s"
-            bg={bgLight}
-            _dark={{ bg: bgDark }}
+            bg={bgColor}
+            color={textColor} 
           >
             {children}
           </Flex>
@@ -53,8 +55,7 @@ export default function PortalPage({
             as="footer"
             padding={4}
             justifyContent="center"
-            bg={bgLight}
-            _dark={{ bg: bgDark }}
+            bg={bgColor}
             transition="all 0.3s"
           >
             <Text fontSize="sm">

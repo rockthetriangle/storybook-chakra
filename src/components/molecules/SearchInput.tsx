@@ -19,23 +19,15 @@ const SearchInput: React.FC<SearchInputProps> = ({
     "background.default",
   ]);
   const buttonBg = useColorModeValue(primaryLight, primaryDark);
+  const buttonColor = useColorModeValue("white", "black");
 
   return (
     <HStack gap="4" width="full">
       <InputGroup flex="1" startElement={<Search size={18} />}>
-        <Input
-          placeholder={placeholder}
-          // bg={inputBg}
-          // color={inputColor}
-        />
+        <Input placeholder={placeholder} />
       </InputGroup>
 
-      <Button
-        bg={buttonBg}
-        // color={buttonColor}
-        // radius={3}
-        // _hover={{ bg: buttonBg === "#cc0000" ? "#a00000" : "#d9d9d9" }}
-      >
+      <Button bg={buttonBg} color={buttonColor}>
         Search
       </Button>
     </HStack>

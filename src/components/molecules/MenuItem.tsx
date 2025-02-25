@@ -2,8 +2,6 @@ import React from "react";
 import { Flex, Icon, Text, Link, FlexProps, useToken } from "@chakra-ui/react";
 import { IconType } from "react-icons";
 import { useColorModeValue } from "../ui/color-mode";
-import IconBox from "../atoms/icon/IconBox";
-import Icons from "../atoms/icon/Icons";
 
 export interface MenuItemProps extends FlexProps {
   icon: IconType;
@@ -26,8 +24,7 @@ const MenuItem: React.FC<MenuItemProps> = ({
   const activeBg = useColorModeValue(primaryLight, primaryDark);
   const activeColor = useColorModeValue("white", "blue.800");
   const inactiveColor = useColorModeValue("gray.600", "gray.300");
-  const hoverBg = useColorModeValue("gray.300", "gray.400");
-  const hoverColor = useColorModeValue("gray.800", "white");
+  const textColor = useColorModeValue("gray.700", "gray.100")
 
   return (
     <Link
@@ -44,12 +41,14 @@ const MenuItem: React.FC<MenuItemProps> = ({
         role="group"
         cursor="pointer"
         transition="all 0.2s"
-        boxShadow={isActive ? "0px 7px 11px 0px rgba(0, 0, 0, 0.04)" : "transparent"}
-      _hover={{
-        transform: "scale(1.05)",
-        boxShadow: "0px 7px 11px 0px rgba(0, 0, 0, 0.04)",
-        transition: "0.2s ease-in-out",
-      }}
+        boxShadow={
+          isActive ? "0px 7px 11px 0px rgba(0, 0, 0, 0.04)" : "transparent"
+        }
+        _hover={{
+          transform: "scale(1.05)",
+          boxShadow: "0px 7px 11px 0px rgba(0, 0, 0, 0.04)",
+          transition: "0.2s ease-in-out",
+        }}
         {...rest}
       >
         {icon && (
@@ -73,7 +72,9 @@ const MenuItem: React.FC<MenuItemProps> = ({
             />
           </Flex>
         )}
-        <Text fontSize="md">{children}</Text>
+        <Text color={textColor} fontSize="md">
+          {children}
+        </Text>
       </Flex>
     </Link>
   );

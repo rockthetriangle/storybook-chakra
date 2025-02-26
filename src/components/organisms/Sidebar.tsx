@@ -34,6 +34,7 @@ const Sidebar = ({ onClose, ...rest }: SidebarProps) => {
   const docButtonBg = useColorModeValue("gray.700", "gray.600");
   const docButtonHoverBg = useColorModeValue("gray.800", "gray.500");
   const docButtonColor = useColorModeValue("white", "gray.100");
+  const textLogoColor = useColorModeValue("gray.700", "gray.100");
 
   return (
     <Box
@@ -48,7 +49,7 @@ const Sidebar = ({ onClose, ...rest }: SidebarProps) => {
       <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
         <Flex align="center">
           <WolfIcon boxSize="29px" color="#cc0000" />
-          <Text fontSize="xl" fontWeight="bold" ml={2}>
+          <Text fontSize="xl" fontWeight="bold" ml={2} color={textLogoColor}>
             Logo
           </Text>
         </Flex>

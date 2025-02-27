@@ -2,15 +2,21 @@ import { Box, For, Tabs } from "@chakra-ui/react";
 import type { Meta, StoryObj } from "@storybook/react";
 import { Home } from "react-feather";
 import {
-    LuBell,
-    LuFolder,
-    LuSettings,
-    LuSquareCheck,
-    LuUser
+  LuBell,
+  LuFolder,
+  LuSettings,
+  LuSquareCheck,
+  LuUser,
 } from "react-icons/lu";
 
 const sizeOptions = ["sm", "md", "lg"] as const;
-const variantOptions = ["line", "enclosed", "outline", "subtle", "plain"] as const;
+const variantOptions = [
+  "line",
+  "enclosed",
+  "outline",
+  "subtle",
+  "plain",
+] as const;
 
 const meta = {
   title: "Atoms/Tabs",
@@ -20,17 +26,12 @@ const meta = {
   },
   tags: ["autodocs"],
   args: {
-    defaultValue: "home",
     variant: "line",
     size: "md",
     colorPalette: "blue",
     fitted: false,
   },
   argTypes: {
-    defaultValue: {
-      control: "text",
-      description: "The initial selected tab value",
-    },
     variant: {
       control: "select",
       options: variantOptions,
@@ -43,7 +44,18 @@ const meta = {
     },
     colorPalette: {
       control: "select",
-      options: ["gray", "red", "green", "blue", "teal", "pink", "purple", "cyan", "orange", "yellow"],
+      options: [
+        "gray",
+        "red",
+        "green",
+        "blue",
+        "teal",
+        "pink",
+        "purple",
+        "cyan",
+        "orange",
+        "yellow",
+      ],
       description: "Color palette to use for the tabs",
     },
     fitted: {
@@ -75,9 +87,15 @@ export const Basic: Story = {
         </Tabs.Trigger>
       </Tabs.List>
       <div style={{ padding: "1rem", marginTop: "0.5rem" }}>
-        <Tabs.Content value="home">Welcome to your dashboard! This is the home tab.</Tabs.Content>
-        <Tabs.Content value="profile">This is your profile page where you can update your information.</Tabs.Content>
-        <Tabs.Content value="settings">Adjust your application settings here.</Tabs.Content>
+        <Tabs.Content value="home">
+          Welcome to your dashboard! This is the home tab.
+        </Tabs.Content>
+        <Tabs.Content value="profile">
+          This is your profile page where you can update your information.
+        </Tabs.Content>
+        <Tabs.Content value="settings">
+          Adjust your application settings here.
+        </Tabs.Content>
       </div>
     </Tabs.Root>
   ),
@@ -93,7 +111,13 @@ export const Sizes: Story = {
         <For each={sizeOptions}>
           {(size) => (
             <div key={size}>
-              <span style={{ fontSize: "0.75rem", marginBottom: "0.5rem", display: "block" }}>
+              <span
+                style={{
+                  fontSize: "0.75rem",
+                  marginBottom: "0.5rem",
+                  display: "block",
+                }}
+              >
                 {size}
               </span>
               <Tabs.Root {...args} size={size} defaultValue={"members"}>
@@ -112,9 +136,15 @@ export const Sizes: Story = {
                   </Tabs.Trigger>
                 </Tabs.List>
                 <div style={{ padding: "1rem", marginTop: "0.5rem" }}>
-                  <Tabs.Content value="members">Manage team members content</Tabs.Content>
-                  <Tabs.Content value="projects">Manage projects content</Tabs.Content>
-                  <Tabs.Content value="tasks">Manage tasks content</Tabs.Content>
+                  <Tabs.Content value="members">
+                    Manage team members content
+                  </Tabs.Content>
+                  <Tabs.Content value="projects">
+                    Manage projects content
+                  </Tabs.Content>
+                  <Tabs.Content value="tasks">
+                    Manage tasks content
+                  </Tabs.Content>
                 </div>
               </Tabs.Root>
             </div>
@@ -134,7 +164,13 @@ export const Variants: Story = {
       <div style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
         {variantOptions.map((variant) => (
           <div key={variant}>
-            <span style={{ fontSize: "0.75rem", marginBottom: "0.5rem", display: "block" }}>
+            <span
+              style={{
+                fontSize: "0.75rem",
+                marginBottom: "0.5rem",
+                display: "block",
+              }}
+            >
               {variant}
             </span>
             <Tabs.Root {...args} variant={variant} defaultValue={"members"}>
@@ -152,9 +188,19 @@ export const Variants: Story = {
                   Tasks
                 </Tabs.Trigger>
               </Tabs.List>
-              <div style={{ padding: "1rem", marginTop: "0.5rem", minHeight: "80px" }}>
-                <Tabs.Content value="members">Manage team members content</Tabs.Content>
-                <Tabs.Content value="projects">Manage projects content</Tabs.Content>
+              <div
+                style={{
+                  padding: "1rem",
+                  marginTop: "0.5rem",
+                  minHeight: "80px",
+                }}
+              >
+                <Tabs.Content value="members">
+                  Manage team members content
+                </Tabs.Content>
+                <Tabs.Content value="projects">
+                  Manage projects content
+                </Tabs.Content>
                 <Tabs.Content value="tasks">Manage tasks content</Tabs.Content>
               </div>
             </Tabs.Root>
@@ -165,7 +211,6 @@ export const Variants: Story = {
   },
 };
 
-
 /**
  * Fitted tabs example
  */
@@ -175,27 +220,29 @@ export const Fitted: Story = {
   },
   render: (args) => (
     <Box width={"500px"}>
-    <Tabs.Root {...args}  defaultValue={"members"}>
-      <Tabs.List>
-        <Tabs.Trigger value="members">
-          <LuUser />
-          Members
-        </Tabs.Trigger>
-        <Tabs.Trigger value="projects">
-          <LuFolder />
-          Projects
-        </Tabs.Trigger>
-        <Tabs.Trigger value="tasks">
-          <LuSquareCheck />
-          Tasks
-        </Tabs.Trigger>
-      </Tabs.List>
-      <div style={{ padding: "1rem", marginTop: "0.5rem" }}>
-        <Tabs.Content value="members">Manage team members content</Tabs.Content>
-        <Tabs.Content value="projects">Manage projects content</Tabs.Content>
-        <Tabs.Content value="tasks">Manage tasks content</Tabs.Content>
-      </div>
-    </Tabs.Root>
+      <Tabs.Root {...args} defaultValue={"members"}>
+        <Tabs.List>
+          <Tabs.Trigger value="members">
+            <LuUser />
+            Members
+          </Tabs.Trigger>
+          <Tabs.Trigger value="projects">
+            <LuFolder />
+            Projects
+          </Tabs.Trigger>
+          <Tabs.Trigger value="tasks">
+            <LuSquareCheck />
+            Tasks
+          </Tabs.Trigger>
+        </Tabs.List>
+        <div style={{ padding: "1rem", marginTop: "0.5rem" }}>
+          <Tabs.Content value="members">
+            Manage team members content
+          </Tabs.Content>
+          <Tabs.Content value="projects">Manage projects content</Tabs.Content>
+          <Tabs.Content value="tasks">Manage tasks content</Tabs.Content>
+        </div>
+      </Tabs.Root>
     </Box>
   ),
 };
@@ -222,9 +269,15 @@ export const Vertical: Story = {
           </Tabs.Trigger>
         </Tabs.List>
         <div style={{ padding: "1rem", flex: 1 }}>
-          <Tabs.Content value="account">Manage your account settings and preferences.</Tabs.Content>
-          <Tabs.Content value="security">Change your password and security settings.</Tabs.Content>
-          <Tabs.Content value="notifications">Control how you receive notifications.</Tabs.Content>
+          <Tabs.Content value="account">
+            Manage your account settings and preferences.
+          </Tabs.Content>
+          <Tabs.Content value="security">
+            Change your password and security settings.
+          </Tabs.Content>
+          <Tabs.Content value="notifications">
+            Control how you receive notifications.
+          </Tabs.Content>
         </div>
       </Tabs.Root>
     </div>

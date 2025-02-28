@@ -15,7 +15,7 @@ export default function PortalPage({
     "background.default",
     "background._dark",
   ]);
-  const bgColor = useColorModeValue(bgLight, bgDark)
+  const bgColor = useColorModeValue(bgLight, bgDark);
   const textColor = useColorModeValue("gray.700", "gray.100");
 
   return (
@@ -45,7 +45,11 @@ export default function PortalPage({
             paddingTop="5rem"
             transition="margin 0.3s"
             bg={bgColor}
-            color={textColor} 
+            color={textColor}
+            bgImage={useColorModeValue(
+              "url('/bg-light.png')",
+              "url('/bg-dark.png')"
+            )}
           >
             {children}
           </Flex>

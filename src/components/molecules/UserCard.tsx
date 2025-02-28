@@ -1,5 +1,6 @@
-import { Avatar, Circle, Float, HStack, Stack, Text } from "@chakra-ui/react";
+import { Avatar, Square, Float, HStack, Stack, Text } from "@chakra-ui/react";
 import { MdOutlineEdit } from "react-icons/md";
+import { useColorModeValue } from "../ui/color-mode";
 
 interface User {
   id: string;
@@ -14,10 +15,13 @@ export const UserCard = ({ user }: { user: User }) => {
       <Avatar.Root size="2xl" variant="solid" shape="square">
         <Avatar.Fallback name={user.name} />
         <Avatar.Image src={user.avatar} />
-        <Float placement="bottom-end" offsetX="2" offsetY="2">
-          <Circle bg="gray.400" size="20px">
-            <MdOutlineEdit style={{ padding: "2px" }} />
-          </Circle>
+        <Float placement="bottom-end" offsetX="1" offsetY="1">
+          <Square bg={useColorModeValue("blue.700", "white")} size="20px">
+            <MdOutlineEdit
+              color={useColorModeValue("white", "#12394d")}
+              style={{ padding: "2px" }}
+            />
+          </Square>
         </Float>
       </Avatar.Root>
       <Stack gap="1">

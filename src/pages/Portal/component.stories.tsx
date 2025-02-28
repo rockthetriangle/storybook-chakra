@@ -1,10 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Component from "./index";
 import { UserCard } from "@/components/molecules/UserCard";
-import { Box, Tabs } from "@chakra-ui/react";
+import { Box, For, Tabs } from "@chakra-ui/react";
 import { IoIosCube } from "react-icons/io";
 import { PiFilesFill } from "react-icons/pi";
 import { AiOutlineTool } from "react-icons/ai";
+import { useColorModeValue } from "@/components/ui/color-mode";
 
 const meta: Meta<typeof Component> = {
   title: "Pages/Portal",
@@ -41,35 +42,62 @@ const sampleUser = {
   avatar: "https://i.pravatar.cc/300?u=iu",
 };
 
-export const WithProfile: Story = {
-  args: {
-    children: (
+const WithProfileComponent = () => {
+  const tabs = [
+    {
+      icon: <IoIosCube />,
+      label: "Overview",
+      value: "overview",
+    },
+    {
+      icon: <PiFilesFill />,
+      label: "Groups",
+      value: "groups",
+    },
+    {
+      icon: <AiOutlineTool />,
+      label: "Actions",
+      value: "actions",
+    },
+  ];
+
+  return (
+    <Box width="full">
       <Box
         display="flex"
         gap="20"
-        alignItems="start"
+        alignItems="center"
         justifyContent={"space-between"}
         width="full"
         p={4}
+        bg={useColorModeValue("white", "blue.700")}
       >
         <UserCard user={sampleUser} />
         <Tabs.Root size="lg" defaultValue={"overview"} variant={"enclosed"}>
-          <Tabs.List>
-            <Tabs.Trigger value="overview">
-              <IoIosCube />
-              Overview
-            </Tabs.Trigger>
-            <Tabs.Trigger value="groups">
-              <PiFilesFill />
-              Groups
-            </Tabs.Trigger>
-            <Tabs.Trigger value="actions">
-              <AiOutlineTool />
-              Actions
-            </Tabs.Trigger>
+          <Tabs.List bg={"transparent"}>
+            <For each={tabs}>
+              {(tab) => (
+                <Tabs.Trigger
+                  value={tab.value}
+                  _selected={{
+                    bg: useColorModeValue("blue.800", "gray.50"),
+                    color: useColorModeValue("gray.50", "blue.800"),
+                  }}
+                >
+                  {tab.icon}
+                  {tab.label}
+                </Tabs.Trigger>
+              )}
+            </For>
           </Tabs.List>
         </Tabs.Root>
       </Box>
-    ),
+    </Box>
+  );
+};
+
+export const WithProfile: Story = {
+  args: {
+    children: <WithProfileComponent />,
   },
 };

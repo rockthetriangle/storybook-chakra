@@ -14,6 +14,7 @@ import { SidePanelComponent } from '@/theme/additions/layout/SidePanel';
 import { MainPanelComponent } from "@/theme/additions/layout/MainPanel";
 import { PanelContentComponent } from "@/theme/additions/layout/PanelContent";
 import { PanelContainerComponent } from "@/theme/additions/layout/PanelContainer";
+import { tabsStyles } from "@/theme/components/tabs";
 
 
 // Define the slide-in animation

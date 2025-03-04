@@ -18,8 +18,8 @@ import {
 } from "react-icons/fi";
 import { WolfIcon } from "../atoms/icon/Icons";
 import MenuItem from "../molecules/MenuItem";
-import { useColorModeValue } from "../ui/color-mode";
-import { ColorModeButtonExtended } from "../Chakra/color-mode";
+import { useColorModeValue } from "../molecules/color-mode";
+import { ColorModeButtonExtended } from "../molecules/color-mode";
 
 interface SidebarProps extends BoxProps {
   onClose?: () => void;

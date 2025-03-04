@@ -1,8 +1,8 @@
-import { ColorModeProvider } from "@/components/Chakra/color-mode";
+import { ColorModeProvider } from "@/components/molecules/color-mode";
 import SearchInput from "@/components/molecules/SearchInput";
 import Sidebar from "@/components/organisms/Sidebar";
 import SidebarMenu from "@/components/organisms/SidebarMenu";
-import { useColorModeValue } from "@/components/ui/color-mode";
+import { useColorModeValue } from "@/components/molecules/color-mode";
 import { Flex, Link, Text, useToken } from "@chakra-ui/react";
 
 export default function PortalPage({

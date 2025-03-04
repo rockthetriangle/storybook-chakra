@@ -1,41 +1,36 @@
-import SidebarMenu from "../components/molecules/SidebarMenu";
-import { Meta, StoryObj } from "@storybook/react";
-import { Box } from "@chakra-ui/react";
+import type { Meta, StoryObj } from '@storybook/react';
+import { Box } from '@chakra-ui/react';
+import Sidebar from '@/components/organisms/Sidebar';
 
-const meta: Meta<typeof SidebarMenu> = {
-  title: "Molecules/SidebarMenu",
-  component: SidebarMenu,
-  argTypes: {
-    themeMode: {
-      control: "radio",
-      options: ["light", "dark"],
-      defaultValue: "light",
-    },
-  },
+const meta: Meta<typeof Sidebar> = {
+  title: 'Organisms/Sidebar',
+  component: Sidebar,
+  decorators: [
+    (Story) => (
+      <Box height="100vh" bg="gray.50">
+        <Story />
+        {/* Simulated content area */}
+        <Box ml={{ base: 0, md: '60' }} p="4">
+          <Box 
+            bg="white" 
+            p="4" 
+            borderRadius="md" 
+            shadow="sm"
+            height="200px"
+          >
+            Sample Content Area
+          </Box>
+        </Box>
+      </Box>
+    ),
+  ],
+  tags: ['autodocs'],
 };
 
 export default meta;
+type Story = StoryObj<typeof Sidebar>;
 
-export const Interactive: StoryObj<typeof SidebarMenu> = {
-  args: {
-    themeMode: "light",
-  },
-  render: ({ themeMode }) => (
-    <Box
-      bg={themeMode === "dark" ? "#1A202C" : "white"}
-      p={4}
-      display="flex"
-      justifyContent="center"
-      alignItems="center"
-      height="30vh"
-    >
-      <SidebarMenu
-        themeMode={themeMode}
-        items={[
-          { name: "HouseIcon", label: "Home", isActive: true },
-          { name: "LandmarkIcon", label: "Places" },
-        ]}
-      />
-    </Box>
-  ),
+// Default sidebar with all features
+export const Default: Story = {
+  args: {},
 };

@@ -1,11 +1,13 @@
 "use client"
 
-import type { IconButtonProps, SpanProps } from "@chakra-ui/react"
-import { ClientOnly, IconButton, Skeleton, Span } from "@chakra-ui/react"
+import type { ConditionalValue, IconButtonProps, SpanProps } from "@chakra-ui/react"
+import { ClientOnly, IconButton, Skeleton, Span, Tabs } from "@chakra-ui/react"
 import { ThemeProvider, useTheme } from "next-themes"
 import type { ThemeProviderProps } from "next-themes"
 import * as React from "react"
+import { v4 as uuidv4 } from "uuid"
 import { LuMoon, LuSun } from "react-icons/lu"
+import { HiSun, HiMoon } from "react-icons/hi2"
 
 export interface ColorModeProviderProps extends ThemeProviderProps {}
 
@@ -73,6 +75,41 @@ export const ColorModeButton = React.forwardRef<
     </ClientOnly>
   )
 })
+
+interface ColorModeButtonExtendedProps {
+  variant: ConditionalValue<
+    "outline" | "line" | "subtle" | "plain" | "enclosed" | undefined
+  >
+  size: ConditionalValue<"sm" | "md" | "lg">
+}
+
+export const ColorModeButtonExtended = function ColorModeButtonExtended(
+  props: ColorModeButtonExtendedProps,
+) {
+  const { toggleColorMode, colorMode } = useColorMode()
+  const { variant, size } = props
+
+  return (
+    <ClientOnly fallback={<Skeleton boxSize="8" />}>
+      <Tabs.Root
+        key={uuidv4()}
+        defaultValue={colorMode}
+        variant={variant}
+        size={size}
+        onValueChange={toggleColorMode}
+      >
+        <Tabs.List>
+          <Tabs.Trigger value="light">
+            <HiSun />
+          </Tabs.Trigger>
+          <Tabs.Trigger value="dark">
+            <HiMoon />
+          </Tabs.Trigger>
+        </Tabs.List>
+      </Tabs.Root>
+    </ClientOnly>
+  )
+}
 
 export const LightMode = React.forwardRef<HTMLSpanElement, SpanProps>(
   function LightMode(props, ref) {

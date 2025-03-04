@@ -1,40 +1,139 @@
+import React, { JSXElementConstructor, ReactElement } from "react";
+import {
+  Input,
+  Kbd,
+  NativeSelectRoot,
+  NativeSelectField,
+  InputElementProps,
+} from "@chakra-ui/react";
+import { LuUser, LuSearch } from "react-icons/lu";
+import { InputGroup } from "@/components/molecules/input-group";
 import type { Meta, StoryObj } from "@storybook/react";
-import { Input, Kbd } from "@chakra-ui/react";
-import { LuSearch } from "react-icons/lu";
-import * as React from "react";
-import { InputGroup, InputGroupProps } from "@/components/Chakra/input-group";
 
-const meta: Meta<typeof InputGroup> = {
-  title: "Molecules/InputGroup",
-  component: InputGroup,
+interface InputGroupProps {
+  startElement?: React.ReactNode;
+  endElement?: React.ReactNode;
+  children: ReactElement<
+    InputElementProps,
+    string | JSXElementConstructor<any>
+  >;
+}
+
+/**
+ * InputGroup component with support for start and end elements
+ */
+const CustomInputGroup: React.FC<InputGroupProps> = ({
+  startElement,
+  endElement,
+  children,
+}) => {
+  return (
+    <InputGroup startElement={startElement} endElement={endElement}>
+      {children}
+    </InputGroup>
+  );
+};
+
+const meta = {
+  title: "Molecules/InputGroup  ",
+  component: CustomInputGroup,
   parameters: {
     layout: "centered",
   },
+  tags: ["autodocs"],
+  args: {
+    startElement: null,
+    endElement: null,
+    children: <Input placeholder="Enter text..." />,
+  },
   argTypes: {
-    startElement: { control: "text" },
-    endElement: { control: "text" },
+    startElement: {
+      control: "text",
+      description: "Element to be displayed at the start of the input",
+    },
+    endElement: {
+      control: "text",
+      description: "Element to be displayed at the end of the input",
+    },
+    children: {
+      control: "text",
+      description: "Input element",
+    },
+  },
+} satisfies Meta<typeof CustomInputGroup>;
+
+export default meta;
+type Story = StoryObj<typeof CustomInputGroup>;
+
+/**
+ * Basic InputGroup example
+ */
+export const Basic: Story = {
+  args: {
+    children: <Input placeholder="Enter your name" />,
   },
 };
 
-export default meta;
-type Story = StoryObj<typeof InputGroup>;
+/**
+ * InputGroup with start element (icon)
+ */
+export const WithStartElement: Story = {
+  args: {
+    startElement: <LuUser />,
+    children: <Input placeholder="Username" />,
+  },
+};
 
-export const SearchInput: Story = {
+/**
+ * InputGroup with end element (keyboard shortcut)
+ */
+export const WithEndElement: Story = {
+  args: {
+    endElement: <Kbd>⌘K</Kbd>,
+    children: <Input placeholder="Search contacts" />,
+  },
+};
+
+/**
+ * InputGroup with both start and end elements
+ */
+export const WithStartAndEndElements: Story = {
   args: {
     startElement: <LuSearch />,
     endElement: <Kbd>⌘K</Kbd>,
     children: <Input placeholder="Search contacts" />,
   },
-  render: (args) => {
-    console.log("SearchInput Props:", args);
-    return <InputGroup {...args} />;
+};
+
+/**
+ * InputGroup with text as start element
+ */
+export const WithTextStartElement: Story = {
+  args: {
+    startElement: "https://",
+    children: <Input ps="4.75em" placeholder="yoursite.com" />,
   },
 };
 
-export const UrlInput: Story = {
-  args: {
-    startElement: "https://",
-    endElement: <Kbd>.com</Kbd>,
-    children: <Input placeholder="yoursite.com" />,
+/**
+ * InputGroup with custom component as end element
+ */
+export const WithCustomEndElement: Story = {
+  render: () => {
+    const DomainSelect = () => (
+      <NativeSelectRoot size="xs" variant="plain" width="auto" me="-1">
+        <NativeSelectField defaultValue=".com" fontSize="sm">
+          <option value=".com">.com</option>
+          <option value=".org">.org</option>
+          <option value=".net">.net</option>
+        </NativeSelectField>
+      </NativeSelectRoot>
+    );
+
+    return (
+      <CustomInputGroup startElement="https://" endElement={<DomainSelect />}>
+        <Input ps="4.75em" placeholder="yoursite.com" />
+      </CustomInputGroup>
+    );
   },
 };

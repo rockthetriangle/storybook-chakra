@@ -21,7 +21,7 @@ export const Colors = () => {
           <Text fontSize="xl" fontWeight="bold" mb={4}>
             {colorPalette.charAt(0).toUpperCase() + colorPalette.slice(1)}
           </Text>
-          <SimpleGrid columns={{ base: 2, md: 5 }} spacing={4}>
+          <SimpleGrid columns={{ base: 2, md: 5 }} gap={4}>
             {shades.map((shade) => {
               // Resolve the actual HEX value from Chakra's theme tokens
               const colorToken = `colors.${colorPalette}.${shade}`;

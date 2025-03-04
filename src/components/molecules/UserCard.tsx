@@ -1,8 +1,8 @@
 import { Avatar, Square, Float, HStack, Stack, Text } from "@chakra-ui/react";
 import { MdOutlineEdit } from "react-icons/md";
-import { useColorModeValue } from "../ui/color-mode";
+import { useColorModeValue } from "./color-mode";
 
-interface User {
+export interface User {
   id: string;
   name: string;
   email: string;
@@ -25,8 +25,8 @@ export const UserCard = ({ user }: { user: User }) => {
         </Float>
       </Avatar.Root>
       <Stack gap="1">
-        <Text fontWeight="medium">{user.name}</Text>
-        <Text fontSize="sm" color="fg.muted">
+        <Text fontWeight="medium" color={useColorModeValue("gray.900", "gray.50")}>{user.name}</Text>
+        <Text fontSize="sm" color={useColorModeValue("gray.600", "gray.100")}>
           {user.email}
         </Text>
       </Stack>

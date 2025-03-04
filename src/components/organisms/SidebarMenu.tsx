@@ -1,7 +1,7 @@
 import { Box, IconButton } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { CiMenuBurger } from "react-icons/ci";
-import { useColorModeValue } from "../ui/color-mode";
+import { useColorModeValue } from "../molecules/color-mode";
 
 interface SidebarMenuProps {
   children: React.ReactNode;

@@ -23,7 +23,7 @@ A scalable and reusable UI component library built with **Chakra UI** and **Stor
 
 1. Clone the repository:
    ```
-   git clone https://github.com/rockthetriangle/common-ui.git
+   git clone https://github.com/rockthetriangle/storybook-chakra.git
    cd common-ui
    
 2. Install dependencies:

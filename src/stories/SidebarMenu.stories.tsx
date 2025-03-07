@@ -1,23 +1,16 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from "@storybook/react";
 
-import { Box, Text, ChakraProvider } from '@chakra-ui/react';
-import Sidebar from '@/components/organisms/Sidebar';
-import SidebarMenu from '@/components/organisms/SidebarMenu';
+import { Box, Text } from "@chakra-ui/react";
+import Sidebar from "@/components/organisms/Sidebar";
+import SidebarMenu from "@/components/organisms/SidebarMenu";
 
 const meta = {
-  title: 'Navigation/SidebarMenu',
+  title: "Organisms/SidebarMenu",
   component: SidebarMenu,
   parameters: {
-    layout: 'fullscreen',
+    layout: "fullscreen",
   },
-//   decorators: [
-//     (Story) => (
-//       <ChakraProvider>
-//         <Story />
-//       </ChakraProvider>
-//     ),
-//   ],
-  tags: ['autodocs'],
+  tags: ["autodocs"],
 } satisfies Meta<typeof SidebarMenu>;
 
 export default meta;
@@ -37,27 +30,23 @@ const SampleContent = () => (
   </Box>
 );
 
-export const Default: Story = {
-  render: () => (
-    <SidebarMenu
-      sidebar={<Sidebar />}
-    >
-      <SampleContent />
-    </SidebarMenu>
-  ),
+    export const Default: Story = {
+  args: {
+    sidebar: <Sidebar />,
+    children: <SampleContent />,
+  },
+  render: (args) => <SidebarMenu {...args} />,
 };
 
 export const MobileView: Story = {
   parameters: {
     viewport: {
-      defaultViewport: 'mobile1'
+      defaultViewport: "mobile1",
     },
   },
-  render: () => (
-    <SidebarMenu 
-      sidebar={<Sidebar />}
-    >
-      <SampleContent />
-    </SidebarMenu>
-  ),
+  args: {
+    sidebar: <Sidebar />,
+    children: <SampleContent />,
+  },
+  render: (args) => <SidebarMenu {...args} />,
 };

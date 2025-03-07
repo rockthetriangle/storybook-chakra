@@ -1,4 +1,4 @@
-import { Button } from "@/components/Chakra/button";
+import { Button } from "@/components/atoms/button";
 import { For, useRecipe } from "@chakra-ui/react";
 import type { Meta, StoryObj } from "@storybook/react";
 import { RiArrowRightLine, RiMailLine } from "react-icons/ri";

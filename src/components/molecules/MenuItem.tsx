@@ -1,7 +1,7 @@
 import React from "react";
 import { Flex, Icon, Text, Link, FlexProps, useToken } from "@chakra-ui/react";
 import { IconType } from "react-icons";
-import { useColorModeValue } from "../ui/color-mode";
+import { useColorModeValue } from "./color-mode";
 
 export interface MenuItemProps extends FlexProps {
   icon: IconType;

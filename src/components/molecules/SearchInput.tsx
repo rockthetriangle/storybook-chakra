@@ -1,7 +1,7 @@
 import { HStack, Input, Button, useToken } from "@chakra-ui/react";
-import { InputGroup } from "../ui/input-group";
+import { InputGroup } from "./input-group";
 import { Search } from "react-feather";
-import { useColorModeValue } from "../ui/color-mode";
+import { useColorModeValue } from "./color-mode";
 
 interface SearchInputProps {
   placeholder?: string;

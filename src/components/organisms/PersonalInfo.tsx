@@ -11,6 +11,7 @@ import {
 import React from "react";
 import { LuBriefcase, LuCode, LuFileText, LuUser } from "react-icons/lu";
 import { useColorModeValue } from "../molecules/color-mode";
+import WorkHistory from "./WorkHistory";
 
 interface ContactInfo {
   email: string;
@@ -335,7 +336,7 @@ const PersonalInfoComponent: React.FC = () => {
 
         <Tabs.Content value="work-history">
           <Box p={4} textAlign="center">
-            <Text color="gray.500">Work History content would go here</Text>
+            <WorkHistory />
           </Box>
         </Tabs.Content>
 

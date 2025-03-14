@@ -56,6 +56,7 @@ export const WithProfile: Story = {
 const WithMainContentComponent = () => {
   return (
     <Box width="full">
+      <ProfilePanel user={sampleUser} />
       <PersonalInfo />
     </Box>
   );

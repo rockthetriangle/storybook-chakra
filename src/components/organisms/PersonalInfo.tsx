@@ -100,14 +100,14 @@ const PersonalInfoComponent: React.FC = () => {
 
   return (
     <Box
-      maxW="4xl"
       mx="auto"
       p={4}
       bg={bgColor}
-      borderRadius="md"
+      marginLeft={3}
+      marginTop={5}
+      w="98%"
+      borderRadius="sm"
       boxShadow="sm"
-      borderWidth="1px"
-      borderColor={borderColor}
     >
       <Tabs.Root defaultValue="personal-info">
         <Tabs.List borderBottomWidth="1px" borderBottomColor={borderColor}>

@@ -7,6 +7,7 @@ import {
   Tabs,
   Text,
   Flex,
+  Table,
 } from "@chakra-ui/react";
 import React from "react";
 import { LuBriefcase, LuCode, LuFileText, LuUser } from "react-icons/lu";
@@ -90,6 +91,15 @@ const PersonalInfoComponent: React.FC = () => {
       preferredMeetingTimes: "10:00 AM - 4:00 PM",
     },
   };
+
+  // Sample skills data
+  const skills = [
+    { id: 1, name: "React", category: "Frontend", proficiency: "Expert" },
+    { id: 2, name: "TypeScript", category: "Languages", proficiency: "Expert" },
+    { id: 3, name: "Node.js", category: "Backend", proficiency: "Advanced" },
+    { id: 4, name: "GraphQL", category: "APIs", proficiency: "Intermediate" },
+    { id: 5, name: "Docker", category: "DevOps", proficiency: "Advanced" },
+  ];
 
   // Colors
   const bgColor = useColorModeValue("white", "gray.800");
@@ -192,6 +202,7 @@ const PersonalInfoComponent: React.FC = () => {
         </Tabs.List>
 
         <Tabs.Content value="personal-info" pt={4}>
+          {/* Keep existing personal-info content */}
           <Flex gap={6}>
             {/* User Icon Column that spans both rows */}
             <Flex
@@ -342,8 +353,32 @@ const PersonalInfoComponent: React.FC = () => {
         </Tabs.Content>
 
         <Tabs.Content value="skills">
-          <Box p={4} textAlign="center">
-            <Text color="gray.500">Skills content would go here</Text>
+          <Box
+            borderWidth="1px"
+            borderRadius="md"
+            borderColor={borderColor}
+            className={colorMode}
+          >
+            <Table.Root size="md" striped>
+              <Table.Header>
+                <Table.Row>
+                  <Table.ColumnHeader>Skill</Table.ColumnHeader>
+                  <Table.ColumnHeader>Category</Table.ColumnHeader>
+                  <Table.ColumnHeader textAlign="end">
+                    Proficiency
+                  </Table.ColumnHeader>
+                </Table.Row>
+              </Table.Header>
+              <Table.Body>
+                {skills.map((skill) => (
+                  <Table.Row key={skill.id}>
+                    <Table.Cell>{skill.name}</Table.Cell>
+                    <Table.Cell>{skill.category}</Table.Cell>
+                    <Table.Cell textAlign="end">{skill.proficiency}</Table.Cell>
+                  </Table.Row>
+                ))}
+              </Table.Body>
+            </Table.Root>
           </Box>
         </Tabs.Content>
 

@@ -30,7 +30,8 @@ const ProfilePanel = ({ user }: { user: User }) => {
       gap="20"
       alignItems="center"
       justifyContent={"space-between"}
-      width="full"
+      marginLeft={3}
+      w="98%"
       p={4}
       bg={useColorModeValue("white", "blue.700")}
     >

@@ -1,4 +1,5 @@
 import ProfilePanel from "@/components/organisms/ProfilePanel";
+import PersonalInfo from "@/components/organisms/PersonalInfo";
 import { Box } from "@chakra-ui/react";
 import type { Meta, StoryObj } from "@storybook/react";
 import Component from "./index";
@@ -49,5 +50,20 @@ const WithProfileComponent = () => {
 export const WithProfile: Story = {
   args: {
     children: <WithProfileComponent />,
+  },
+};
+
+const WithMainContentComponent = () => {
+  return (
+    <Box width="full">
+      <ProfilePanel user={sampleUser} />
+      <PersonalInfo />
+    </Box>
+  );
+};
+
+export const WithMainContent: Story = {
+  args: {
+    children: <WithMainContentComponent />,
   },
 };

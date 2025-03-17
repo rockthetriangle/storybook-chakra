@@ -74,12 +74,6 @@ const workHistory: WorkExperience[] = [
 
 const WorkHistory = () => {
   const borderColor = useColorModeValue("gray.200", "gray.700");
-  const currentBadgeBg = useColorModeValue("green.100", "green.900");
-  const currentBadgeColor = useColorModeValue("green.800", "green.200");
-  const skillBadgeBg = useColorModeValue("blue.50", "blue.900");
-  const skillBadgeColor = useColorModeValue("blue.600", "blue.300");
-  const hoverBgColor = useColorModeValue("gray.50", "gray.700");
-  const theadBgColor = useColorModeValue("gray.50", "gray.700");
 
   return (
     <Box
@@ -88,8 +82,8 @@ const WorkHistory = () => {
       borderColor={borderColor}
       overflow="hidden"
     >
-      <Table.Root size="md">
-        <Table.Header bg={theadBgColor}>
+      <Table.Root size="md" striped>
+        <Table.Header>
           <Table.Row>
             <Table.ColumnHeader>Position & Company</Table.ColumnHeader>
             <Table.ColumnHeader>Duration</Table.ColumnHeader>
@@ -102,20 +96,24 @@ const WorkHistory = () => {
           {workHistory.map((job) => (
             <Table.Row
               key={job.id}
-              _hover={{ bg: hoverBgColor }}
-              borderBottomWidth="1px"
-              borderBottomColor={borderColor}
+              bg="white"
+              color="gray.700"
+              _dark={{
+                bg: "gray.800",
+                color: "gray.50",
+              }}
             >
               <Table.Cell>
                 <VStack align="start" gap={1}>
                   <Text fontWeight="medium">{job.position}</Text>
-                  <Text color="blue.500" fontSize="sm">
+                  <Text color="blue.500" _dark={{color:"blue.300"}} fontSize="sm">
                     {job.company}
                   </Text>
                   {job.isCurrent && (
                     <Badge
-                      bg={currentBadgeBg}
-                      color={currentBadgeColor}
+                      bg="green.100"
+                      color="green.800"
+                      _dark={{ bg: "green.900", color: "green.200" }}
                       fontSize="xs"
                       px={2}
                       py={0.5}
@@ -154,9 +152,10 @@ const WorkHistory = () => {
                   {job.skills.map((skill, idx) => (
                     <Badge
                       key={idx}
-                      bg={skillBadgeBg}
-                      color={skillBadgeColor}
-                      fontSize="xs"
+                      bg="blue.50"
+                      color="blue.600"
+                      _dark={{ bg: "blue.900", color: "blue.300" }}
+                      fontSize="xs" 
                       px={2}
                       py={0.5}
                       borderRadius="md"

@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import { LuBriefcase, LuCode, LuFileText, LuUser } from "react-icons/lu";
-import { useColorModeValue } from "../molecules/color-mode";
+import { useColorMode, useColorModeValue } from "../molecules/color-mode";
 import WorkHistory from "./WorkHistory";
 
 interface ContactInfo {
@@ -98,6 +98,7 @@ const PersonalInfoComponent: React.FC = () => {
   const hoverTabColor = useColorModeValue("blue.50", "blue.900");
   const iconBgColor = useColorModeValue("blue.50", "blue.900");
   const iconColor = useColorModeValue("blue.500", "blue.300");
+  const { colorMode } = useColorMode();
 
   return (
     <Box
@@ -335,7 +336,7 @@ const PersonalInfoComponent: React.FC = () => {
         </Tabs.Content>
 
         <Tabs.Content value="work-history">
-          <Box p={4} textAlign="center">
+          <Box p={4} textAlign="center" className={colorMode}>
             <WorkHistory />
           </Box>
         </Tabs.Content>

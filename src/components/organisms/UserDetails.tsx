@@ -1,5 +1,5 @@
-import { Box, Tabs, Text } from "@chakra-ui/react";
-import React from "react";
+import { Box, Tabs, Text, useBreakpointValue } from "@chakra-ui/react";
+import React, { useState } from "react";
 import {
   LuBriefcase,
   LuCode,
@@ -18,6 +18,7 @@ type TabsTriggerProps = {
   icon: React.ElementType;
   label: string;
   tooltip: string;
+  isActive: boolean;
 };
 
 const TabsTrigger: React.FC<TabsTriggerProps> = ({
@@ -25,9 +26,15 @@ const TabsTrigger: React.FC<TabsTriggerProps> = ({
   icon: Icon,
   label,
   tooltip,
+  isActive,
 }) => {
   const activeTabColor = useColorModeValue("blue.500", "blue.300");
   const hoverTabColor = useColorModeValue("gray.50", "gray.700");
+  const showHelp = useBreakpointValue({ base: false, md: true });
+  const showLabels = useBreakpointValue({
+    base: "activeLabelOnly",
+    md: "allLabels",
+  });
 
   return (
     <Tabs.Trigger
@@ -36,8 +43,9 @@ const TabsTrigger: React.FC<TabsTriggerProps> = ({
       color="gray.600"
       display="flex"
       alignItems="center"
+      justifyContent="center"
       gap={2}
-      px={4}
+      px={useBreakpointValue({ base: 2, md: 4 })}
       py={2}
       _selected={{
         color: activeTabColor,
@@ -47,12 +55,15 @@ const TabsTrigger: React.FC<TabsTriggerProps> = ({
       _hover={{ bg: hoverTabColor }}
     >
       <Icon />
-      {label}
-      <Tooltip showArrow content={tooltip}>
-        <Box display="inline-flex" ml={1} cursor="help">
-          <LuCircleHelp size={16} />
-        </Box>
-      </Tooltip>
+      {(showLabels === "allLabels" ||
+        (showLabels === "activeLabelOnly" && isActive)) && <Text>{label}</Text>}
+      {showHelp && (
+        <Tooltip showArrow content={tooltip}>
+          <Box display="inline-flex" ml={1} cursor="help">
+            <LuCircleHelp size={16} />
+          </Box>
+        </Tooltip>
+      )}
     </Tabs.Trigger>
   );
 };
@@ -71,6 +82,8 @@ const UserDetails: React.FC = () => {
   const bgColor = useColorModeValue("white", "gray.800");
   const borderColor = useColorModeValue("gray.200", "gray.700");
   const { colorMode } = useColorMode();
+  const tabSize = useBreakpointValue({ base: "sm", md: "md" }) as "sm" | "md";
+  const [activeTab, setActiveTab] = useState("personal-info");
 
   return (
     <Box
@@ -83,31 +96,48 @@ const UserDetails: React.FC = () => {
       borderRadius="sm"
       boxShadow="sm"
     >
-      <Tabs.Root defaultValue="personal-info">
-        <Tabs.List borderBottomWidth="1px" borderBottomColor={borderColor}>
+      <Tabs.Root
+        defaultValue="personal-info"
+        size={tabSize}
+        onValueChange={({value}) => setActiveTab(value)}
+      >
+        <Tabs.List
+          borderBottomWidth="1px"
+          borderBottomColor={borderColor}
+          width="100%"
+          display="flex"
+          justifyContent={useBreakpointValue({
+            base: "space-between",
+            md: "flex-start",
+          })}
+        >
           <TabsTrigger
             value="personal-info"
             icon={LuUser}
             label="Personal Info"
             tooltip="View basic user information"
+            isActive={activeTab === "personal-info"}
           />
           <TabsTrigger
             value="work-history"
             icon={LuBriefcase}
             label="Work History"
             tooltip="Employment records and job history"
+            isActive={activeTab === "work-history"}
           />
           <TabsTrigger
             value="skills"
             icon={LuCode}
             label="Skills"
             tooltip="Technical competencies and proficiency levels"
+            isActive={activeTab === "skills"}
           />
           <TabsTrigger
             value="documents"
             icon={LuFileText}
             label="Documents"
             tooltip="Access user documents and files"
+            isActive={activeTab === "documents"}
           />
         </Tabs.List>
 

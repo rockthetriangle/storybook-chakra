@@ -1,4 +1,4 @@
-import { Button } from "@/components/atoms/button";
+import { Button } from "@/components/atoms/Button";
 import { Box, Heading, Input, Link, Stack, Text } from "@chakra-ui/react";
 import { FaApple, FaChevronRight, FaGoogle, FaMicrosoft } from "react-icons/fa";
 

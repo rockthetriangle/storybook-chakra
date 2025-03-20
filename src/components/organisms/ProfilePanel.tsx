@@ -1,4 +1,4 @@
-import { Box, For, Tabs } from "@chakra-ui/react";
+import { Box, For, Tabs, useBreakpointValue } from "@chakra-ui/react";
 import { useColorModeValue } from "../molecules/color-mode";
 import { User, UserCard } from "../molecules/UserCard";
 import { IoIosCube } from "react-icons/io";
@@ -24,19 +24,24 @@ const tabs = [
 ];
 
 const ProfilePanel = ({ user }: { user: User }) => {
+  const flexDirection = useBreakpointValue({ base: "column", md: "row" }) as  "column" | "row";
+  const flexGap = useBreakpointValue({ base: 4, md: 20 });
+  const tabSize = useBreakpointValue({ base: "sm", md: "lg" }) as "sm" | "md" | "lg";
+
   return (
     <Box
       display="flex"
-      gap="20"
+      gap={flexGap}
       alignItems="center"
       justifyContent={"space-between"}
       marginLeft={3}
       w="98%"
       p={4}
       bg={useColorModeValue("white", "blue.700")}
+      flexDirection={flexDirection}
     >
       <UserCard user={user} />
-      <Tabs.Root size="lg" defaultValue={"overview"} variant={"enclosed"}>
+      <Tabs.Root size={tabSize} defaultValue={"overview"} variant={"enclosed"}>
         <Tabs.List bg={"transparent"}>
           <For each={tabs}>
             {(tab) => (

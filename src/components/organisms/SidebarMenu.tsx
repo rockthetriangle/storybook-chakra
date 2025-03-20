@@ -1,4 +1,4 @@
-import { Box, IconButton } from "@chakra-ui/react";
+import { Box, IconButton, useBreakpointValue } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { CiMenuBurger } from "react-icons/ci";
 import { useColorModeValue } from "../molecules/color-mode";
@@ -15,6 +15,7 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ children, sidebar }) => {
   const overlayBg = useColorModeValue("blackAlpha.200", "blackAlpha.600");
   const menuIconBg = useColorModeValue("gray.700", "gray.100");
   const menuIconColor = useColorModeValue("gray.100", "gray.700");
+  const iconSize = useBreakpointValue({ base: "xs", md: "md" }) as "xs" | "md";
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
@@ -34,6 +35,7 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ children, sidebar }) => {
           onClick={toggleSidebar}
           bg={menuIconBg}
           color={menuIconColor}
+          size={iconSize}
         >
           <CiMenuBurger />
         </IconButton>
@@ -55,7 +57,6 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ children, sidebar }) => {
         {sidebar}
       </Box>
 
-      {/* Overlay (Mobile Only) */}
       <Box
         position="fixed"
         top="0"

@@ -1,7 +1,14 @@
-import { Box, IconButton, useBreakpointValue } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  IconButton,
+  useBreakpointValue,
+  Text,
+} from "@chakra-ui/react";
 import React, { useState } from "react";
 import { CiMenuBurger } from "react-icons/ci";
 import { useColorModeValue } from "../molecules/color-mode";
+import { WolfIcon } from "../atoms/icon/Icons";
 
 interface SidebarMenuProps {
   children: React.ReactNode;
@@ -16,6 +23,7 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ children, sidebar }) => {
   const menuIconBg = useColorModeValue("gray.700", "gray.100");
   const menuIconColor = useColorModeValue("gray.100", "gray.700");
   const iconSize = useBreakpointValue({ base: "xs", md: "md" }) as "xs" | "md";
+  const textLogoColor = useColorModeValue("gray.700", "gray.100");
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
@@ -25,22 +33,26 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ children, sidebar }) => {
     <Box position="relative" height="100vh" overflow="hidden">
       {/* Hamburger Menu Button */}
       {!isOpen && (
-        <IconButton
-          aria-label="Toggle Menu"
-          position="fixed"
-          top="4"
-          left="4"
-          zIndex="20"
-          display={"flex"}
-          onClick={toggleSidebar}
-          bg={menuIconBg}
-          color={menuIconColor}
-          size={iconSize}
-        >
-          <CiMenuBurger />
-        </IconButton>
+        <Flex direction={"row"} position="fixed" top="4" left="4">
+          <Flex align="center" mr={50}>
+            <WolfIcon boxSize="29px" color="#cc0000" />
+            <Text fontSize="xl" fontWeight="bold" ml={2} color={textLogoColor}>
+              Logo
+            </Text>
+          </Flex>
+          <IconButton
+            aria-label="Toggle Menu"
+            zIndex="20"
+            display={"flex"}
+            onClick={toggleSidebar}
+            bg={menuIconBg}
+            color={menuIconColor}
+            size={iconSize}
+          >
+            <CiMenuBurger />
+          </IconButton>
+        </Flex>
       )}
-
       {/* Sidebar */}
       <Box
         position="fixed"

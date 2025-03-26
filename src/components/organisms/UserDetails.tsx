@@ -13,6 +13,8 @@ import PersonalInfo from "./PersonalInfo";
 import { Tooltip } from "@/components/atoms/tooltip";
 import Skills from "./Skills";
 import Documents from "./Documents";
+import ActivityLog from "./activity-log";
+import { MdOutlineMonitorHeart } from "react-icons/md";
 
 type TabsTriggerProps = {
   value: string;
@@ -131,6 +133,13 @@ const UserDetails: React.FC = () => {
             tooltip="Access user documents and files"
             isActive={activeTab === "documents"}
           />
+          <TabsTrigger
+            value="activity-log"
+            icon={MdOutlineMonitorHeart}
+            label="Activity Log"
+            tooltip="View user activities and achievements"
+            isActive={activeTab === "activity-log"}
+          />
         </Tabs.List>
 
         <Tabs.Content value="personal-info">
@@ -183,6 +192,12 @@ const UserDetails: React.FC = () => {
             >
               <Documents />
             </Box>
+          </Box>
+        </Tabs.Content>
+
+        <Tabs.Content value="activity-log">
+          <Box p={4} textAlign="center">
+            <ActivityLog />
           </Box>
         </Tabs.Content>
       </Tabs.Root>

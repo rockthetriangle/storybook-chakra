@@ -40,6 +40,7 @@ export default function PortalPage({
             width={headerWidth}
             marginLeft={headerMarginLeft}
             top={0}
+            left={36}
             zIndex={10}
             padding={4}
             alignItems="center"

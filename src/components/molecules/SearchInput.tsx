@@ -24,7 +24,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
   const iconSize = useBreakpointValue({ base: 14, md: 18 })
 
   return (
-    <HStack gap={stackGap} width="full">
+    <HStack gap={stackGap} width="87%">
       <InputGroup flex="1" startElement={<Search size={iconSize} />} bg={inputBg}>
         <Input placeholder={placeholder} size={size} />
       </InputGroup>

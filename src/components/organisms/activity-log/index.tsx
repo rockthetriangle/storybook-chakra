@@ -15,6 +15,8 @@ import {
   Box,
   Table,
   Textarea,
+  Text,
+  Tag,
 } from "@chakra-ui/react";
 import { ChevronDown, ChevronRight } from "react-feather";
 import { Checkbox } from "@/components/atoms/Checkbox";
@@ -88,8 +90,6 @@ const ActivityLog = () => {
                 }
                 onChange={row.getToggleSelectedHandler()}
                 cursor="pointer"
-                // onClick={(e) => {console.log(row.getIsSelected())}}
-                // onClick={row.getToggleSelectedHandler()}
               />
               <IconButton
                 aria-label="Collapse/Expand"
@@ -107,12 +107,12 @@ const ActivityLog = () => {
           );
         },
       },
-      // {
-      //   id: "id",
-      //   header: "ID",
-      //   accessorKey: "id",
-      //   enableColumnFilter: false,
-      // },
+      {
+        id: "id",
+        header: "ID",
+        accessorKey: "id",
+        enableColumnFilter: false,
+      },
       {
         id: "date",
         header: "Date",
@@ -206,8 +206,46 @@ const ActivityLog = () => {
     enableRowSelection: true,
   });
 
+  console.log(table.getState().columnFilters);
+
+  // Extract applied filters
+  const appliedFilters = table.getState().columnFilters;
+
+  // Function to remove a specific filter
+  const removeFilter = (filterId: string) => {
+    table.setColumnFilters((prev) => prev.filter((f) => f.id !== filterId));
+  };
+
+  // Function to clear all filters
+  const clearFilters = () => {
+    table.setColumnFilters([]);
+  };
+
   return (
     <Box overflowX="auto">
+      {appliedFilters.length > 0 && (
+        <HStack gap={2} mb={4} flexWrap="wrap">
+          <Text fontWeight="bold">Applied Filters:</Text>
+          {appliedFilters.map(({ id, value }) => (
+            <Tag.Root>
+              <Tag.Label>
+                {id}: {value as string}
+              </Tag.Label>
+              <Tag.EndElement>
+                <Tag.CloseTrigger onClick={() => removeFilter(id)} />
+              </Tag.EndElement>
+            </Tag.Root>
+          ))}
+          <Button
+            size="xs"
+            variant="outline"
+            colorScheme="red"
+            onClick={clearFilters}
+          >
+            Clear All
+          </Button>
+        </HStack>
+      )}
       <Table.Root>
         <Table.Header>
           {table.getHeaderGroups().map((headerGroup) => (

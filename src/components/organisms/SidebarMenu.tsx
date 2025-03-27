@@ -36,6 +36,7 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ children, sidebar }) => {
           bg={menuIconBg}
           color={menuIconColor}
           size={iconSize}
+          height={35}
         >
           <CiMenuBurger />
         </IconButton>

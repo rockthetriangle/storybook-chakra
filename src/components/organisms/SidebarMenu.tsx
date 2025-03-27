@@ -34,7 +34,7 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ children, sidebar }) => {
       {/* Hamburger Menu Button */}
       {!isOpen && (
         <Flex direction={"row"} position="fixed" top="4" left="4">
-          <Flex align="center" mr={50}>
+          <Flex align="center" mr={2}>
             <WolfIcon boxSize="29px" color="#cc0000" />
             <Text fontSize="xl" fontWeight="bold" ml={2} color={textLogoColor}>
               Logo

@@ -94,7 +94,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
       direction={stackDirection}
       gap={stackGap}
     >
-      <HStack gap={hStackGap} align="center" justify="center" width="full">
+      <HStack gap={hStackGap} align="center" justify="center">
         <InputGroup
           flex="1"
           startElement={<Search size={iconSize} color={iconColor} />}

@@ -33,7 +33,7 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ children, sidebar }) => {
     <Box position="relative" height="100vh" overflow="hidden">
       {/* Hamburger Menu Button */}
       {!isOpen && (
-        <Flex direction={"row"} position="fixed" top="4" left="4">
+        <Flex direction={"row"} position="fixed" zIndex={"20"} top="4" left="4">
           <Flex align="center" mr={2}>
             <WolfIcon boxSize="29px" color="#cc0000" />
             <Text fontSize="xl" fontWeight="bold" ml={2} color={textLogoColor}>
@@ -42,7 +42,6 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ children, sidebar }) => {
           </Flex>
           <IconButton
             aria-label="Toggle Menu"
-            zIndex="20"
             display={"flex"}
             onClick={toggleSidebar}
             bg={menuIconBg}

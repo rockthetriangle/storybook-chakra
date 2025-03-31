@@ -1,15 +1,24 @@
+import SearchInput from "@/components/molecules/SearchInput";
 import {
-  useBreakpointValue,
+  Button,
   Flex,
+  Menu,
+  Portal,
   Stack,
   Tabs,
+  useBreakpointValue,
   useToken,
 } from "@chakra-ui/react";
-import SearchInput from "@/components/molecules/SearchInput";
-import { useColorModeValue } from "./color-mode";
-import { GrCube } from "react-icons/gr";
-import { LuFiles } from "react-icons/lu";
 import { AiFillTool } from "react-icons/ai";
+import { FaChevronDown, FaSignOutAlt } from "react-icons/fa";
+import { FaGear } from "react-icons/fa6";
+import { GrCube } from "react-icons/gr";
+import { IoMdHelpCircle } from "react-icons/io";
+import { LuFiles } from "react-icons/lu";
+import { Avatar } from "../atoms/Avatar";
+import Sidebar from "../organisms/Sidebar";
+import SidebarMenu from "../organisms/SidebarMenu";
+import { useColorMode, useColorModeValue } from "./color-mode";
 
 const TABS = [
   {
@@ -27,20 +36,15 @@ const TABS = [
 ];
 
 export const Header = ({ showTabs }: { showTabs?: boolean }) => {
-  const headerMarginLeft = useBreakpointValue({ base: 10, md: 12 });
-  const headerWidth = useBreakpointValue({
-    base: "calc(100% - 34px)",
-    md: "calc(100% - 48px)",
-  });
+  const { colorMode } = useColorMode();
   // Token values for colors
-  const [gray50, gray500, gray600, blue500] = useToken("colors", [
-    "gray.50",
-    "gray.500",
-    "gray.600",
-    "blue.500",
-  ]);
+  const [gray50, gray100, gray500, gray600, blue500, blue600] = useToken(
+    "colors",
+    ["gray.50", "gray.100", "gray.500", "gray.600", "blue.500", "blue.600"]
+  );
 
   // Theme-based values
+  const headerBg = useColorModeValue(gray100, blue600);
   const activeTabBg = useColorModeValue(gray600, blue500);
   const tabColor = useColorModeValue(gray500, gray50);
 
@@ -55,14 +59,16 @@ export const Header = ({ showTabs }: { showTabs?: boolean }) => {
     <Flex
       as="header"
       position="fixed"
-      width={headerWidth}
-      marginLeft={headerMarginLeft}
+      width={"100%"}
       top={0}
       zIndex={10}
-      padding={4}
+      py={2}
+      px={4}
       alignItems="center"
       transition="all 0.3s"
+      bg={headerBg}
     >
+      <SidebarMenu sidebar={<Sidebar />} />
       <Stack
         width="full"
         align="center"
@@ -98,6 +104,44 @@ export const Header = ({ showTabs }: { showTabs?: boolean }) => {
           </Tabs.Root>
         )}
       </Stack>
+
+      <Menu.Root>
+        <Menu.Trigger asChild className={colorMode}>
+          <Button
+            variant="outline"
+            size="sm"
+            pl={0}
+            pr={2}
+            py={2}
+            rounded="full"
+          >
+            <Avatar
+              name="Henry"
+              size="xs"
+              src="https://avatar.iran.liara.run/public/boy?username=Henry"
+            />
+            <FaChevronDown />
+          </Button>
+        </Menu.Trigger>
+        <Portal>
+          <Menu.Positioner>
+            <Menu.Content className={colorMode}>
+              <Menu.Item value="settings">
+                <FaGear />
+                <span>Settings</span>
+              </Menu.Item>
+              <Menu.Item value="signout">
+                <FaSignOutAlt />
+                <span>Sign Out</span>
+              </Menu.Item>
+              <Menu.Item value="help">
+                <IoMdHelpCircle size={17} />
+                <span>Help</span>
+              </Menu.Item>
+            </Menu.Content>
+          </Menu.Positioner>
+        </Portal>
+      </Menu.Root>
     </Flex>
   );
 };

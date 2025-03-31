@@ -111,7 +111,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
     gray100
   );
   const buttonColor = useColorModeValue("white", gray800);
-  const inputBg = useColorModeValue(gray100, blue700);
+  const inputBg = useColorModeValue("white", blue700);
   const inputColor = useColorModeValue(gray800, gray100);
   const inputPlaceHolderColor = useColorModeValue("#999", gray100);
   const iconColor = useToken("colors", inputPlaceHolderColor)[0];

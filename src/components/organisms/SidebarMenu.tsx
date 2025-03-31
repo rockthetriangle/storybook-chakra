@@ -11,11 +11,10 @@ import { useColorModeValue } from "../molecules/color-mode";
 import { WolfIcon } from "../atoms/icon/Icons";
 
 interface SidebarMenuProps {
-  children: React.ReactNode;
   sidebar: React.ReactNode;
 }
 
-const SidebarMenu: React.FC<SidebarMenuProps> = ({ children, sidebar }) => {
+const SidebarMenu: React.FC<SidebarMenuProps> = ({ sidebar }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const bgColor = useColorModeValue("white", "gray.800");
@@ -30,29 +29,28 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ children, sidebar }) => {
   };
 
   return (
-    <Box position="relative" height="100vh" overflow="hidden">
+    <>
       {/* Hamburger Menu Button */}
-      {!isOpen && (
-        <Flex direction={"row"} position="fixed" zIndex={"20"} top="4" left="4">
-          <Flex align="center" mr={2}>
-            <WolfIcon boxSize="29px" color="#cc0000" />
-            <Text fontSize="xl" fontWeight="bold" ml={2} color={textLogoColor}>
-              Logo
-            </Text>
-          </Flex>
-          <IconButton
-            aria-label="Toggle Menu"
-            display={"flex"}
-            onClick={toggleSidebar}
-            bg={menuIconBg}
-            color={menuIconColor}
-            size={iconSize}
-            height={35}
+      <Flex direction={"row"} zIndex={"20"}>
+        <IconButton
+          aria-label="Toggle Menu"
+          onClick={toggleSidebar}
+          bg={menuIconBg}
+          color={menuIconColor}
+          size={iconSize}
+          height={35}
+          width={35}
+          minWidth="unset"
         >
-            <CiMenuBurger />
-          </IconButton>
+          <CiMenuBurger />
+        </IconButton>
+        <Flex align="center" ml={2}>
+          <WolfIcon boxSize="29px" color="#cc0000" />
+          <Text fontSize="xl" fontWeight="bold" ml={2} color={textLogoColor}>
+            Logo
+          </Text>
         </Flex>
-      )}
+      </Flex>
       {/* Sidebar */}
       <Box
         position="fixed"
@@ -82,12 +80,7 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ children, sidebar }) => {
         transition="opacity 0.3s"
         opacity={isOpen ? 1 : 0}
       />
-
-      {/* Main Content */}
-      <Box transition="margin 0.3s ease-in-out" height="100vh" overflow="auto">
-        {children}
-      </Box>
-    </Box>
+    </>
   );
 };
 

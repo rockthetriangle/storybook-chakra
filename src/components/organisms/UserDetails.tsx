@@ -10,8 +10,11 @@ import {
 import { useColorMode, useColorModeValue } from "../molecules/color-mode";
 import WorkHistory from "./WorkHistory";
 import PersonalInfo from "./PersonalInfo";
-import { Table } from "@chakra-ui/react";
 import { Tooltip } from "@/components/atoms/tooltip";
+import Skills from "./Skills";
+import Documents from "./Documents";
+import ActivityLog from "./activity-log";
+import { MdOutlineMonitorHeart } from "react-icons/md";
 
 type TabsTriggerProps = {
   value: string;
@@ -69,15 +72,6 @@ const TabsTrigger: React.FC<TabsTriggerProps> = ({
 };
 
 const UserDetails: React.FC = () => {
-  // Sample skills data
-  const skills = [
-    { id: 1, name: "React", category: "Frontend", proficiency: "Expert" },
-    { id: 2, name: "TypeScript", category: "Languages", proficiency: "Expert" },
-    { id: 3, name: "Node.js", category: "Backend", proficiency: "Advanced" },
-    { id: 4, name: "GraphQL", category: "APIs", proficiency: "Intermediate" },
-    { id: 5, name: "Docker", category: "DevOps", proficiency: "Advanced" },
-  ];
-
   // Colors
   const bgColor = useColorModeValue("white", "gray.800");
   const borderColor = useColorModeValue("gray.200", "gray.700");
@@ -99,7 +93,7 @@ const UserDetails: React.FC = () => {
       <Tabs.Root
         defaultValue="personal-info"
         size={tabSize}
-        onValueChange={({value}) => setActiveTab(value)}
+        onValueChange={({ value }) => setActiveTab(value)}
       >
         <Tabs.List
           borderBottomWidth="1px"
@@ -139,6 +133,13 @@ const UserDetails: React.FC = () => {
             tooltip="Access user documents and files"
             isActive={activeTab === "documents"}
           />
+          <TabsTrigger
+            value="activity-log"
+            icon={MdOutlineMonitorHeart}
+            label="Activity Log"
+            tooltip="View user activities and achievements"
+            isActive={activeTab === "activity-log"}
+          />
         </Tabs.List>
 
         <Tabs.Content value="personal-info">
@@ -176,32 +177,27 @@ const UserDetails: React.FC = () => {
             borderColor={borderColor}
             className={colorMode}
           >
-            <Table.Root size="md" striped>
-              <Table.Header>
-                <Table.Row>
-                  <Table.ColumnHeader>Skill</Table.ColumnHeader>
-                  <Table.ColumnHeader>Category</Table.ColumnHeader>
-                  <Table.ColumnHeader textAlign="end">
-                    Proficiency
-                  </Table.ColumnHeader>
-                </Table.Row>
-              </Table.Header>
-              <Table.Body>
-                {skills.map((skill) => (
-                  <Table.Row key={skill.id}>
-                    <Table.Cell>{skill.name}</Table.Cell>
-                    <Table.Cell>{skill.category}</Table.Cell>
-                    <Table.Cell textAlign="end">{skill.proficiency}</Table.Cell>
-                  </Table.Row>
-                ))}
-              </Table.Body>
-            </Table.Root>
+            <Skills />
           </Box>
         </Tabs.Content>
 
         <Tabs.Content value="documents">
           <Box p={4} textAlign="center">
-            <Text color="gray.500">Documents content would go here</Text>
+            <Box
+              p={1}
+              borderWidth="1px"
+              borderRadius="md"
+              borderColor={borderColor}
+              className={colorMode}
+            >
+              <Documents />
+            </Box>
+          </Box>
+        </Tabs.Content>
+
+        <Tabs.Content value="activity-log">
+          <Box p={4} textAlign="center">
+            <ActivityLog />
           </Box>
         </Tabs.Content>
       </Tabs.Root>

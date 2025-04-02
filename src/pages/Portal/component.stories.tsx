@@ -32,6 +32,12 @@ type Story = StoryObj<typeof meta>;
 
 export const PortalPage: Story = {};
 
+export const WithHeaderTabs: Story = {
+  args: {
+    showTabs: true,
+  },
+};
+
 const sampleUser = {
   id: "1",
   name: "John Mason",

@@ -14,6 +14,7 @@ import {
 } from "@/components/molecules/color-mode";
 
 import { breakpoints } from "@/theme/foundations/breakpoints";
+import { toastRecipe } from "@/receipes/toastRecipe";
 
 // Define the slide-in animation
 export const animationStyles = defineAnimationStyles({
@@ -134,6 +135,9 @@ const _config = defineConfig({
     },
     breakpoints,
     animationStyles,
+    recipes: {
+      toast: toastRecipe,
+    },
   },
   globalCss: {
     html: {

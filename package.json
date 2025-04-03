@@ -14,7 +14,7 @@
     "cache": "rm -rf node_modules/.vite node_modules/.storybook node_modules/.cache"
   },
   "dependencies": {
-    "@chakra-ui/react": "^3.8.0",
+    "@chakra-ui/react": "^3.15.0",
     "@pandacss/dev": "^0.53.0",
     "@storybook/addon-themes": "^8.5.3",
     "@tanstack/react-table": "^8.21.2",

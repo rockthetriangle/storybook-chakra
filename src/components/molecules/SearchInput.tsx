@@ -14,11 +14,12 @@ import {
   VStack,
   Box,
   Text,
+  Spinner,
 } from "@chakra-ui/react";
 import { InputGroup } from "./input-group";
 import { Search } from "react-feather";
 import { useColorModeValue } from "./color-mode";
-import { useMemo, useRef, useState } from "react";
+import { useMemo, useRef, useState, useEffect } from "react";
 import { useCombobox } from "downshift";
 import { Avatar } from "../atoms/Avatar";
 
@@ -118,14 +119,17 @@ const SearchInput: React.FC<SearchInputProps> = ({
   const selectContentBg = useColorModeValue(gray100, blue800);
   const selectContentTextColor = useColorModeValue(gray800, gray100);
   const highlightedItemBg = useColorModeValue(gray200, gray700);
+  const spinnerColor = useColorModeValue("blue.500", "blue.300");
 
   const buttonWidth = useBreakpointValue({ base: "auto", md: 160 });
   const inputGroupWidth = useBreakpointValue({ base: "auto", lg: 469 });
   const hStackGap = useBreakpointValue({ base: 2, md: 4 });
   const size = useBreakpointValue<"xs" | "md">({ base: "xs", md: "md" });
   const iconSize = useBreakpointValue({ base: 14, md: 18 });
+  // const spinnerSize = useBreakpointValue({ base: "sm", md: "sm" });
 
   const inputGroupRef = useRef<HTMLInputElement>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const actions = {
     itemToString: (x) => x.name,
@@ -145,10 +149,32 @@ const SearchInput: React.FC<SearchInputProps> = ({
   });
 
   const [filteredUsers, setFilteredUsers] = useState<UserEntry[]>([]);
+  const [inputValue, setInputValue] = useState("");
+
   const filterUsers = useMemo(
     () => createListCollection({ items: filteredUsers }),
     [filteredUsers]
   );
+
+  // Effect to simulate loading delay when searching
+  useEffect(() => {
+    let timer: NodeJS.Timeout;
+
+    if (inputValue.trim()) {
+      setIsLoading(true);
+
+      // Artificial delay of 800ms before showing results
+      timer = setTimeout(() => {
+        setFilteredUsers(coll.items.filter(makeCollFilter(inputValue)));
+        setIsLoading(false);
+      }, 800);
+    } else {
+      setFilteredUsers([]);
+      setIsLoading(false);
+    }
+
+    return () => clearTimeout(timer);
+  }, [inputValue]);
 
   const {
     isOpen,
@@ -160,8 +186,8 @@ const SearchInput: React.FC<SearchInputProps> = ({
   } = useCombobox({
     items: filterUsers.items,
     itemToString: (x) => (x != null ? actions.itemToString(x) : ""),
-    onInputValueChange({ inputValue }) {
-      setFilteredUsers(coll.items.filter(makeCollFilter(inputValue)));
+    onInputValueChange({ inputValue = "" }) {
+      setInputValue(inputValue);
     },
   });
 
@@ -177,6 +203,11 @@ const SearchInput: React.FC<SearchInputProps> = ({
             <InputGroup
               flex="1"
               startElement={<Search size={iconSize} color={iconColor} />}
+              endElement={
+                isLoading ? (
+                  <Spinner size={"sm"} color={spinnerColor} mr={2} />
+                ) : null
+              }
               bg={inputBg}
               width={inputGroupWidth}
               maxWidth={469}
@@ -202,7 +233,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
           <PopoverContent width="auto" display="contents">
             <SelectRoot
               open
-              hidden={filterUsers.size === 0}
+              hidden={filterUsers.size === 0 || isLoading}
               collection={filterUsers}
               value={
                 selectedItem
@@ -254,6 +285,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
         width={buttonWidth}
         fontWeight="bold"
         textTransform="uppercase"
+        disabled={isLoading}
       >
         Search
       </Button>

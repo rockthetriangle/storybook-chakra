@@ -19,6 +19,7 @@
     "@storybook/addon-themes": "^8.5.3",
     "@tanstack/react-table": "^8.21.2",
     "downshift": "^9.0.9",
+    "framer-motion": "^12.7.4",
     "next-themes": "^0.4.4",
     "react": "^18.3.1",
     "react-custom-scrollbars-2": "^4.5.0",

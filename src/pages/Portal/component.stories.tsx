@@ -3,6 +3,7 @@ import UserDetails from "@/components/organisms/UserDetails";
 import { Box } from "@chakra-ui/react";
 import type { Meta, StoryObj } from "@storybook/react";
 import Component from "./index";
+import { SearchGuideCard } from "@/components/molecules/SearchGuideCard";
 
 const meta: Meta<typeof Component> = {
   title: "Pages/Portal",
@@ -71,5 +72,28 @@ const WithMainContentComponent = () => {
 export const WithMainContent: Story = {
   args: {
     children: <WithMainContentComponent />,
+  },
+};
+
+const WithSearchGuideCardComponent = () => {
+  return (
+    <Box
+      width={"full"}
+      alignItems={"center"}
+      justifyContent={"center"}
+      display={"flex"}
+    >
+      <SearchGuideCard
+        iconSrc="/icons/search-people-group.png"
+        title="Search People"
+        description="Look up someone using their CampusID or full name."
+      />
+    </Box>
+  );
+};
+
+export const WithSearchGuideCard: Story = {
+  args: {
+    children: <WithSearchGuideCardComponent />,
   },
 };

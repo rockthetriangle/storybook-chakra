@@ -1,188 +1,131 @@
+import { NativeSelect } from "@/components/atoms/NativeSelect";
+import { useColorModeValue } from "@/components/molecules/color-mode";
 import {
+  Box,
+  Button,
+  Separator as Divider,
+  HStack,
+  Input,
+  Table,
+  Tag,
+  Text,
+  useToken,
+} from "@chakra-ui/react";
+import {
+  ColumnDef,
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
   getSortedRowModel,
   useReactTable,
-  type ColumnDef,
 } from "@tanstack/react-table";
 import { Fragment, useMemo, useState } from "react";
-import { Activity, FilterElementProps } from "./types";
-import {
-  HStack,
-  Button,
-  IconButton,
-  Box,
-  Table,
-  Textarea,
-  Text,
-  Tag,
-} from "@chakra-ui/react";
-import { ChevronDown, ChevronRight } from "react-feather";
-import { Checkbox } from "@/components/atoms/Checkbox";
-import { ACTIVITIES_DATA } from "./data";
+import { ChevronDown, ChevronUp } from "react-feather";
+import { motion, AnimatePresence } from "framer-motion";
 import { ColumnFilter } from "./ColumnFilter";
 import { ColumnSorter } from "./ColumnSorter";
-import { NativeSelect } from "@/components/atoms/NativeSelect";
+import { CLEARANCE_DATA } from "./data";
+import { Clearance, FilterElementProps } from "./types";
 
-const uniqueLocations = [
-  ...new Set(ACTIVITIES_DATA.map((item) => item.location)),
+// Create motion components for our animations
+const MotionBox = motion(Box);
+const MotionTableRow = motion(Table.Row);
+const MotionDivider = motion(Divider);
+const MotionHStack = motion(HStack);
+const MotionTag = motion(Tag.Root);
+
+const uniqueSchedules = [
+  ...new Set(CLEARANCE_DATA.map((item) => item.scheduleName)),
 ];
 
-const uniqueCategories = [
-  ...new Set(ACTIVITIES_DATA.map((item) => item.category)),
+const uniqueElevators = [
+  ...new Set(
+    CLEARANCE_DATA.map((item) => item.elevatorName).filter(Boolean) as string[]
+  ),
 ];
 
-const ActivityLog = () => {
-  const [data, setData] = useState(ACTIVITIES_DATA);
+export default function ClearanceTable() {
+  const [gray200, gray700] = useToken("colors", ["gray.200", "gray.700"]);
+  const clearanceBgColor = useColorModeValue(gray200, gray700);
+  const clearanceColor = useColorModeValue(gray700, gray200);
 
-  const deleteSelectedItems = (ids: string[]) => {
-    setData((prevData) => prevData.filter((item) => !ids.includes(item.id)));
+  const data = useMemo(() => CLEARANCE_DATA, []);
+
+  const [expandedClearances, setExpandedClearances] = useState<
+    Record<string, boolean>
+  >({});
+  const [globalFilter, setGlobalFilter] = useState("");
+
+  const toggleClearance = (clearanceName: string) => {
+    setExpandedClearances((prev) => ({
+      ...prev,
+      [clearanceName]: !prev[clearanceName],
+    }));
   };
 
-  const columns = useMemo<ColumnDef<Activity>[]>(
+  const columns = useMemo<ColumnDef<Clearance>[]>(
     () => [
       {
-        id: "selection",
-        accessorKey: "id",
-        enableSorting: false,
-        enableColumnFilter: false,
-        header: function render({ table }) {
-          return (
-            <HStack>
-              <Checkbox
-                checked={
-                  !table.getIsAllRowsSelected() && table.getIsSomeRowsSelected()
-                    ? "indeterminate"
-                    : table.getIsAllRowsSelected()
-                }
-                onChange={table.getToggleAllRowsSelectedHandler()}
-              />
-
-              {(table.getIsSomeRowsSelected() === true ||
-                table.getIsAllRowsSelected() === true) && (
-                <Button
-                  size="xs"
-                  color="red"
-                  variant="outline"
-                  onClick={() =>
-                    deleteSelectedItems(
-                      table
-                        .getSelectedRowModel()
-                        .flatRows.map(({ original }) => original.id)
-                    )
-                  }
-                >
-                  Delete
-                </Button>
-              )}
-            </HStack>
-          );
-        },
-        cell: function render({ row }) {
-          return (
-            <HStack gap="3">
-              <Checkbox
-                checked={
-                  row.getIsSomeSelected()
-                    ? "indeterminate"
-                    : row.getIsSelected()
-                }
-                onChange={row.getToggleSelectedHandler()}
-                cursor="pointer"
-              />
-              <IconButton
-                aria-label="Collapse/Expand"
-                size="xs"
-                onClick={() => row.toggleExpanded()}
-                variant="plain"
-              >
-                {row.getIsExpanded() ? (
-                  <ChevronDown size={14} />
-                ) : (
-                  <ChevronRight size={14} />
-                )}
-              </IconButton>
-            </HStack>
-          );
-        },
-      },
-      {
-        id: "id",
-        header: "ID",
-        accessorKey: "id",
-        enableColumnFilter: false,
-      },
-      {
-        id: "date",
-        header: "Date",
-        accessorKey: "date",
-        cell: function render({ getValue }) {
-          return new Date(getValue() as string).toLocaleString();
-        },
-        enableColumnFilter: false,
-      },
-      {
-        id: "activity",
-        header: "Activity",
-        accessorKey: "activity",
+        accessorKey: "doorName",
+        header: ({ column }) => (
+          <HStack>
+            <span>Door Name</span>
+            <ColumnFilter column={column} />
+          </HStack>
+        ),
         meta: {
           filterOperator: "contains",
         },
       },
       {
-        id: "location",
-        header: "Location",
-        accessorKey: "location",
+        accessorKey: "elevatorName",
         meta: {
           filterOperator: "eq",
           filterElement: function render(props: FilterElementProps) {
             return (
               <NativeSelect
-                placeholder="All Locations"
-                items={uniqueLocations.map((loc) => ({
-                  label: loc,
-                  value: loc,
+                placeholder="All Elevators"
+                items={uniqueElevators.map((elevator) => ({
+                  label: elevator,
+                  value: elevator,
                 }))}
                 {...props}
               ></NativeSelect>
             );
           },
         },
+        header: ({ column }) => (
+          <HStack>
+            <span>Elevator Name</span>
+            <ColumnSorter column={column} />
+            <ColumnFilter column={column} />
+          </HStack>
+        ),
       },
       {
-        id: "duration",
-        header: "Duration (hours)",
-        accessorKey: "duration",
-        enableColumnFilter: false,
-      },
-      {
-        id: "category",
-        header: "Category",
-        accessorKey: "category",
+        accessorKey: "scheduleName",
         meta: {
           filterOperator: "eq",
           filterElement: function render(props: FilterElementProps) {
             return (
               <NativeSelect
-                placeholder="All Categories"
-                items={uniqueCategories.map((loc) => ({
-                  label: loc,
-                  value: loc,
+                placeholder="All Schedules"
+                items={uniqueSchedules.map((sch) => ({
+                  label: sch,
+                  value: sch,
                 }))}
                 {...props}
               ></NativeSelect>
             );
           },
         },
-      },
-      {
-        id: "details",
-        header: "Details",
-        accessorKey: "details",
-        meta: {
-          filterOperator: "contains",
-        },
+        header: ({ column }) => (
+          <HStack>
+            <span>Schedule Name</span>
+            <ColumnSorter column={column} />
+            <ColumnFilter column={column} />
+          </HStack>
+        ),
       },
     ],
     []
@@ -191,22 +134,16 @@ const ActivityLog = () => {
   const table = useReactTable({
     data,
     columns,
-    initialState: {
-      sorting: [
-        {
-          id: "id",
-          desc: false,
-        },
-      ],
+    state: {
+      globalFilter,
     },
+    onGlobalFilterChange: setGlobalFilter,
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     getSortedRowModel: getSortedRowModel(),
-    getRowId: (row) => row.id,
-    enableRowSelection: true,
   });
 
-  console.log(table.getState().columnFilters);
+  let lastClearanceName = "";
 
   // Extract applied filters
   const appliedFilters = table.getState().columnFilters;
@@ -222,86 +159,176 @@ const ActivityLog = () => {
   };
 
   return (
-    <Box overflowX="auto">
+    <MotionBox 
+      overflowX="auto"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+    >
+      <motion.div
+        initial={{ y: -20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.5 }}
+      >
+        <Text fontSize="2xl" fontWeight="bold" mb={4}>
+          Doors by Clearance
+        </Text>
+      </motion.div>
+
+      {/* Global Filter */}
+      <motion.div
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
+      >
+        <Input
+          placeholder="Search..."
+          value={globalFilter ?? ""}
+          onChange={(e) => setGlobalFilter(e.target.value)}
+          mb={4}
+          maxW="300px"
+          borderColor={clearanceColor}
+        />
+      </motion.div>
+
       {appliedFilters.length > 0 && (
-        <HStack gap={2} mb={4} flexWrap="wrap">
+        <MotionHStack 
+          gap={2} 
+          mb={4} 
+          flexWrap="wrap"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3 }}
+        >
           <Text fontWeight="bold">Applied Filters:</Text>
-          {appliedFilters.map(({ id, value }) => (
-            <Tag.Root>
-              <Tag.Label>
-                {id}: {value as string}
-              </Tag.Label>
-              <Tag.EndElement>
-                <Tag.CloseTrigger onClick={() => removeFilter(id)} />
-              </Tag.EndElement>
-            </Tag.Root>
-          ))}
-          <Button
-            size="xs"
-            variant="outline"
-            colorScheme="red"
-            onClick={clearFilters}
+          <AnimatePresence>
+            {appliedFilters.map(({ id, value }, index) => (
+              <MotionTag
+                key={id}
+                initial={{ scale: 0.8, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.8, opacity: 0 }}
+                transition={{ duration: 0.2, delay: index * 0.05 }}
+              >
+                <Tag.Label>
+                  {id}: {value as string}
+                </Tag.Label>
+                <Tag.EndElement>
+                  <Tag.CloseTrigger onClick={() => removeFilter(id)} />
+                </Tag.EndElement>
+              </MotionTag>
+            ))}
+          </AnimatePresence>
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
-            Clear All
-          </Button>
-        </HStack>
+            <Button
+              size="xs"
+              variant="outline"
+              colorScheme="red"
+              onClick={clearFilters}
+            >
+              Clear All
+            </Button>
+          </motion.div>
+        </MotionHStack>
       )}
-      <Table.Root>
-        <Table.Header>
-          {table.getHeaderGroups().map((headerGroup) => (
-            <Table.Row key={headerGroup.id}>
-              {headerGroup.headers.map((header) => (
+
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.3 }}
+      >
+        <Table.Root variant="line">
+          <Table.Header>
+            <Table.Row>
+              {table.getHeaderGroups()[0].headers.map((header) => (
                 <Table.ColumnHeader key={header.id}>
-                  {!header.isPlaceholder && (
-                    <HStack gap="2">
-                      <Box>
-                        {flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
-                      </Box>
-                      <HStack gap="2">
-                        <ColumnSorter column={header.column} />
-                        <ColumnFilter column={header.column} />
-                      </HStack>
-                    </HStack>
+                  {flexRender(
+                    header.column.columnDef.header,
+                    header.getContext()
                   )}
                 </Table.ColumnHeader>
               ))}
             </Table.Row>
-          ))}
-        </Table.Header>
-        <Table.Body>
-          {table.getRowModel().rows.map((row) => {
-            return (
-              <Fragment key={row.id}>
-                <Table.Row>
-                  {row.getVisibleCells().map((cell) => {
-                    return (
-                      <Table.Cell key={cell.id}>
-                        {flexRender(
-                          cell.column.columnDef.cell,
-                          cell.getContext()
-                        )}
-                      </Table.Cell>
-                    );
-                  })}
-                </Table.Row>
+          </Table.Header>
 
-                {row.getIsExpanded() && (
-                  <Table.Row>
-                    <Table.Cell colSpan={row.getVisibleCells().length}>
-                      <Textarea readOnly value={row.original.notes} />
-                    </Table.Cell>
-                  </Table.Row>
-                )}
-              </Fragment>
-            );
-          })}
-        </Table.Body>
-      </Table.Root>
-    </Box>
+          <Table.Body>
+            {table.getRowModel().rows.map((row, rowIndex) => {
+              const rowData = row.original as Clearance;
+              const isNewClearance = rowData.clearanceName !== lastClearanceName;
+              lastClearanceName = rowData.clearanceName;
+
+              const isExpanded =
+                expandedClearances[rowData.clearanceName] ?? true;
+
+              return (
+                <Fragment key={row.id}>
+                  {isNewClearance && (
+                    <>
+                      <MotionTableRow
+                        bg={clearanceBgColor}
+                        color={clearanceColor}
+                        _hover={{ cursor: "pointer" }}
+                        onClick={() => toggleClearance(rowData.clearanceName)}
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.3, delay: rowIndex * 0.03 }}
+                        whileHover={{ backgroundColor: useColorModeValue("gray.300", "gray.600") }}
+                      >
+                        <Table.Cell colSpan={3} p={4}>
+                          <Text
+                            fontSize="lg"
+                            fontWeight="bold"
+                            style={{
+                              display: "flex",
+                              alignItems: "center",
+                              gap: "8px",
+                            }}
+                          >
+                            {rowData.clearanceName}{" "}
+                            <motion.div
+                              animate={{ rotate: isExpanded ? 0 : 180 }}
+                              transition={{ duration: 0.3 }}
+                            >
+                              {isExpanded ? <ChevronUp /> : <ChevronDown />}
+                            </motion.div>
+                          </Text>
+                        </Table.Cell>
+                      </MotionTableRow>
+                      <MotionDivider 
+                        initial={{ scaleX: 0 }}
+                        animate={{ scaleX: 1 }}
+                        transition={{ duration: 0.3 }}
+                      />
+                    </>
+                  )}
+                  <AnimatePresence>
+                    {isExpanded && (
+                      <MotionTableRow
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: "auto" }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        {row.getVisibleCells().map((cell) => (
+                          <Table.Cell key={cell.id}>
+                            {flexRender(
+                              cell.column.columnDef.cell,
+                              cell.getContext()
+                            )}
+                          </Table.Cell>
+                        ))}
+                      </MotionTableRow>
+                    )}
+                  </AnimatePresence>
+                </Fragment>
+              );
+            })}
+          </Table.Body>
+        </Table.Root>
+      </motion.div>
+    </MotionBox>
   );
-};
-
-export default ActivityLog;
+}

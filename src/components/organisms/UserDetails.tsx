@@ -196,7 +196,12 @@ const UserDetails: React.FC = () => {
         </Tabs.Content>
 
         <Tabs.Content value="activity-log">
-          <Box p={4} textAlign="center">
+          <Box
+            p={4}
+            textAlign="center"
+            borderColor={borderColor}
+            className={colorMode}
+          >
             <ActivityLog />
           </Box>
         </Tabs.Content>

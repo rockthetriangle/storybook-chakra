@@ -6,6 +6,8 @@ import {
   Separator as Divider,
   HStack,
   Input,
+  Menu,
+  Portal,
   Table,
   Tag,
   Text,
@@ -20,7 +22,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import { Fragment, useMemo, useState } from "react";
-import { ChevronDown, ChevronUp } from "react-feather";
+import { ChevronUp, MoreVertical, Layers } from "react-feather";
 import { motion, AnimatePresence } from "framer-motion";
 import { ColumnFilter } from "./ColumnFilter";
 import { ColumnSorter } from "./ColumnSorter";
@@ -44,6 +46,11 @@ const uniqueElevators = [
   ),
 ];
 
+// Get unique clearance names for the expand/collapse all functionality
+const uniqueClearances = [
+  ...new Set(CLEARANCE_DATA.map((item) => item.clearanceName)),
+];
+
 export default function ClearanceTable() {
   const [gray200, gray700] = useToken("colors", ["gray.200", "gray.700"]);
   const clearanceBgColor = useColorModeValue(gray200, gray700);
@@ -56,11 +63,27 @@ export default function ClearanceTable() {
   >({});
   const [globalFilter, setGlobalFilter] = useState("");
 
+  // Track if all sections are currently expanded or collapsed
+  const [allExpanded, setAllExpanded] = useState(true);
+
   const toggleClearance = (clearanceName: string) => {
     setExpandedClearances((prev) => ({
       ...prev,
       [clearanceName]: !prev[clearanceName],
     }));
+  };
+
+  // Function to toggle all clearances at once
+  const toggleAllClearances = () => {
+    const newExpandedState = !allExpanded;
+    const updatedExpandedClearances: Record<string, boolean> = {};
+
+    uniqueClearances.forEach((clearanceName) => {
+      updatedExpandedClearances[clearanceName] = newExpandedState;
+    });
+
+    setExpandedClearances(updatedExpandedClearances);
+    setAllExpanded(newExpandedState);
   };
 
   const columns = useMemo<ColumnDef<Clearance>[]>(
@@ -127,6 +150,28 @@ export default function ClearanceTable() {
           </HStack>
         ),
       },
+      {
+        header: "Actions",
+        cell: () => {
+          return (
+            <Menu.Root>
+              <Menu.Trigger asChild>
+                <Button variant="outline" size="sm">
+                  <MoreVertical size={16} />
+                </Button>
+              </Menu.Trigger>
+              <Portal>
+                <Menu.Positioner>
+                  <Menu.Content>
+                    <Menu.Item value="revoke">Revoke</Menu.Item>
+                    <Menu.Item value="assign">Assign</Menu.Item>
+                  </Menu.Content>
+                </Menu.Positioner>
+              </Portal>
+            </Menu.Root>
+          );
+        },
+      },
     ],
     []
   );
@@ -159,7 +204,7 @@ export default function ClearanceTable() {
   };
 
   return (
-    <MotionBox 
+    <MotionBox
       overflowX="auto"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -170,9 +215,22 @@ export default function ClearanceTable() {
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5 }}
       >
-        <Text fontSize="2xl" fontWeight="bold" mb={4}>
-          Doors by Clearance
-        </Text>
+        <HStack justifyContent="space-between" mb={4}>
+          <Text fontSize="2xl" fontWeight="bold">
+            Doors by Clearance
+          </Text>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.3 }}
+          >
+            <Button size="sm" variant="outline" onClick={toggleAllClearances} width={"40"}>
+              <Layers size={16} />
+              {allExpanded ? "Collapse All" : "Expand All"}
+            </Button>
+          </motion.div>
+        </HStack>
       </motion.div>
 
       {/* Global Filter */}
@@ -192,9 +250,9 @@ export default function ClearanceTable() {
       </motion.div>
 
       {appliedFilters.length > 0 && (
-        <MotionHStack 
-          gap={2} 
-          mb={4} 
+        <MotionHStack
+          gap={2}
+          mb={4}
           flexWrap="wrap"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -219,10 +277,7 @@ export default function ClearanceTable() {
               </MotionTag>
             ))}
           </AnimatePresence>
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
+          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
             <Button
               size="xs"
               variant="outline"
@@ -257,11 +312,15 @@ export default function ClearanceTable() {
           <Table.Body>
             {table.getRowModel().rows.map((row, rowIndex) => {
               const rowData = row.original as Clearance;
-              const isNewClearance = rowData.clearanceName !== lastClearanceName;
+              const isNewClearance =
+                rowData.clearanceName !== lastClearanceName;
               lastClearanceName = rowData.clearanceName;
 
+              // Check if this clearance has a specific expanded state, otherwise use the default (all expanded)
               const isExpanded =
-                expandedClearances[rowData.clearanceName] ?? true;
+                expandedClearances[rowData.clearanceName] !== undefined
+                  ? expandedClearances[rowData.clearanceName]
+                  : allExpanded;
 
               return (
                 <Fragment key={row.id}>
@@ -275,9 +334,14 @@ export default function ClearanceTable() {
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.3, delay: rowIndex * 0.03 }}
-                        whileHover={{ backgroundColor: useColorModeValue("gray.300", "gray.600") }}
+                        whileHover={{
+                          backgroundColor: useColorModeValue(
+                            "gray.300",
+                            "gray.600"
+                          ),
+                        }}
                       >
-                        <Table.Cell colSpan={3} p={4}>
+                        <Table.Cell colSpan={4} p={4}>
                           <Text
                             fontSize="lg"
                             fontWeight="bold"
@@ -292,12 +356,12 @@ export default function ClearanceTable() {
                               animate={{ rotate: isExpanded ? 0 : 180 }}
                               transition={{ duration: 0.3 }}
                             >
-                              {isExpanded ? <ChevronUp /> : <ChevronDown />}
+                              <ChevronUp />
                             </motion.div>
                           </Text>
                         </Table.Cell>
                       </MotionTableRow>
-                      <MotionDivider 
+                      <MotionDivider
                         initial={{ scaleX: 0 }}
                         animate={{ scaleX: 1 }}
                         transition={{ duration: 0.3 }}

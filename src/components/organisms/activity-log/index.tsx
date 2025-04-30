@@ -3,11 +3,8 @@ import { useColorModeValue } from "@/components/molecules/color-mode";
 import {
   Box,
   Button,
-  Separator as Divider,
   HStack,
   Input,
-  Menu,
-  Portal,
   Table,
   Tag,
   Text,
@@ -22,17 +19,18 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import { Fragment, useMemo, useState } from "react";
-import { ChevronUp, MoreVertical, Layers } from "react-feather";
+import { ChevronUp, Layers, Trash, Edit } from "react-feather";
 import { motion, AnimatePresence } from "framer-motion";
 import { ColumnFilter } from "./ColumnFilter";
 import { ColumnSorter } from "./ColumnSorter";
 import { CLEARANCE_DATA } from "./data";
 import { Clearance, FilterElementProps } from "./types";
+import { Checkbox } from "@/components/atoms/Checkbox";
+import { ActionConfirmation } from "./ActionConfirmation";
 
 // Create motion components for our animations
 const MotionBox = motion(Box);
 const MotionTableRow = motion(Table.Row);
-const MotionDivider = motion(Divider);
 const MotionHStack = motion(HStack);
 const MotionTag = motion(Tag.Root);
 
@@ -52,10 +50,15 @@ const uniqueClearances = [
 ];
 
 export default function ClearanceTable() {
-  const [gray200, gray700] = useToken("colors", ["gray.200", "gray.700"]);
+  const [gray200, gray700, gray50, gray600] = useToken("colors", [
+    "gray.200",
+    "gray.700",
+    "gray.50",
+    "gray.600",
+  ]);
   const clearanceBgColor = useColorModeValue(gray200, gray700);
+  const selectedRowBgColor = useColorModeValue(gray50, gray600);
   const clearanceColor = useColorModeValue(gray700, gray200);
-
   const data = useMemo(() => CLEARANCE_DATA, []);
 
   const [expandedClearances, setExpandedClearances] = useState<
@@ -88,6 +91,25 @@ export default function ClearanceTable() {
 
   const columns = useMemo<ColumnDef<Clearance>[]>(
     () => [
+      {
+        id: "select",
+        header: ({ table }) => (
+          <Checkbox
+            checked={
+              table.getIsSomePageRowsSelected()
+                ? "indeterminate"
+                : table.getIsAllPageRowsSelected()
+            }
+            onChange={table.getToggleAllPageRowsSelectedHandler()}
+          />
+        ),
+        cell: ({ row }) => (
+          <Checkbox
+            checked={row.getIsSelected()}
+            onChange={row.getToggleSelectedHandler()}
+          />
+        ),
+      },
       {
         accessorKey: "doorName",
         header: ({ column }) => (
@@ -150,28 +172,6 @@ export default function ClearanceTable() {
           </HStack>
         ),
       },
-      {
-        header: "Actions",
-        cell: () => {
-          return (
-            <Menu.Root>
-              <Menu.Trigger asChild>
-                <Button variant="outline" size="sm">
-                  <MoreVertical size={16} />
-                </Button>
-              </Menu.Trigger>
-              <Portal>
-                <Menu.Positioner>
-                  <Menu.Content>
-                    <Menu.Item value="revoke">Revoke</Menu.Item>
-                    <Menu.Item value="assign">Assign</Menu.Item>
-                  </Menu.Content>
-                </Menu.Positioner>
-              </Portal>
-            </Menu.Root>
-          );
-        },
-      },
     ],
     []
   );
@@ -186,6 +186,7 @@ export default function ClearanceTable() {
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     getSortedRowModel: getSortedRowModel(),
+    enableRowSelection: true,
   });
 
   let lastClearanceName = "";
@@ -201,6 +202,28 @@ export default function ClearanceTable() {
   // Function to clear all filters
   const clearFilters = () => {
     table.setColumnFilters([]);
+  };
+
+  // Count selected rows
+  const selectedRowsCount = table.getSelectedRowModel().rows.length;
+
+  // Action handlers
+  const handleRevoke = () => {
+    console.log(
+      "Revoking",
+      table.getSelectedRowModel().rows.map((row) => row.original)
+    );
+    // Implement your revoke logic here
+    table.toggleAllRowsSelected(false); // Deselect rows after action
+  };
+
+  const handleAssign = () => {
+    console.log(
+      "Assigning",
+      table.getSelectedRowModel().rows.map((row) => row.original)
+    );
+    // Implement your assign logic here
+    table.toggleAllRowsSelected(false); // Deselect rows after action
   };
 
   return (
@@ -225,7 +248,12 @@ export default function ClearanceTable() {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3 }}
           >
-            <Button size="sm" variant="outline" onClick={toggleAllClearances} width={"40"}>
+            <Button
+              size="sm"
+              variant="outline"
+              onClick={toggleAllClearances}
+              width={"40"}
+            >
               <Layers size={16} />
               {allExpanded ? "Collapse All" : "Expand All"}
             </Button>
@@ -233,21 +261,58 @@ export default function ClearanceTable() {
         </HStack>
       </motion.div>
 
-      {/* Global Filter */}
-      <motion.div
-        initial={{ opacity: 0, x: -20 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.5, delay: 0.2 }}
-      >
-        <Input
-          placeholder="Search..."
-          value={globalFilter ?? ""}
-          onChange={(e) => setGlobalFilter(e.target.value)}
-          mb={4}
-          maxW="300px"
-          borderColor={clearanceColor}
-        />
-      </motion.div>
+      {/* Search and Actions Bar */}
+      <HStack justifyContent="space-between" mb={4} alignItems="center">
+        <motion.div
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
+          <Input
+            placeholder="Search..."
+            value={globalFilter ?? ""}
+            onChange={(e) => setGlobalFilter(e.target.value)}
+            w="64"
+            borderColor={clearanceColor}
+          />
+        </motion.div>
+
+        {/* Bulk Actions Menu - Only visible when rows are selected */}
+        <AnimatePresence>
+          {selectedRowsCount > 0 && (
+            <MotionHStack
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              transition={{ duration: 0.2 }}
+            >
+              <Text fontWeight="medium">{selectedRowsCount} selected</Text>
+              <ActionConfirmation
+                title="Revoke Clearance"
+                message="Are you sure you want to revoke the selected clearances from John Doe?"
+                onConfirm={handleRevoke}
+                button={
+                  <Button size="sm" variant="outline">
+                    <Trash size={16} />
+                    Revoke
+                  </Button>
+                }
+              />
+              <ActionConfirmation
+                title="Assign Clearance"
+                message="Are you sure you want to assign the selected clearances to John Doe?"
+                onConfirm={handleAssign}
+                button={
+                  <Button size="sm">
+                    <Edit size={16} />
+                    Assign
+                  </Button>
+                }
+              />
+            </MotionHStack>
+          )}
+        </AnimatePresence>
+      </HStack>
 
       {appliedFilters.length > 0 && (
         <MotionHStack
@@ -310,7 +375,7 @@ export default function ClearanceTable() {
           </Table.Header>
 
           <Table.Body>
-            {table.getRowModel().rows.map((row, rowIndex) => {
+            {table.getRowModel().rows.map((row) => {
               const rowData = row.original as Clearance;
               const isNewClearance =
                 rowData.clearanceName !== lastClearanceName;
@@ -324,50 +389,87 @@ export default function ClearanceTable() {
 
               return (
                 <Fragment key={row.id}>
-                  {isNewClearance && (
-                    <>
-                      <MotionTableRow
-                        bg={clearanceBgColor}
-                        color={clearanceColor}
-                        _hover={{ cursor: "pointer" }}
-                        onClick={() => toggleClearance(rowData.clearanceName)}
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.3, delay: rowIndex * 0.03 }}
-                        whileHover={{
-                          backgroundColor: useColorModeValue(
-                            "gray.300",
-                            "gray.600"
-                          ),
-                        }}
-                      >
-                        <Table.Cell colSpan={4} p={4}>
-                          <Text
-                            fontSize="lg"
-                            fontWeight="bold"
-                            style={{
-                              display: "flex",
-                              alignItems: "center",
-                              gap: "8px",
-                            }}
+                  {isNewClearance &&
+                    (() => {
+                      const clearanceRows = table
+                        .getRowModel()
+                        .rows.filter(
+                          (r) =>
+                            (r.original as Clearance).clearanceName ===
+                            rowData.clearanceName
+                        );
+                      const selectedCount = clearanceRows.filter((r) =>
+                        r.getIsSelected()
+                      ).length;
+                      const isAllSelected =
+                        selectedCount === clearanceRows.length;
+                      const isNoneSelected = selectedCount === 0;
+                      const isIndeterminate = !isAllSelected && !isNoneSelected;
+
+                      const toggleClearanceRows = (checked: boolean) => {
+                        clearanceRows.forEach((r) => r.toggleSelected(checked));
+                      };
+
+                      return (
+                        <MotionTableRow
+                          bg={clearanceBgColor}
+                          color={clearanceColor}
+                          _hover={{ cursor: "pointer" }}
+                          initial={{ opacity: 0, x: -20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ duration: 0.2 }}
+                        >
+                          <Table.Cell
+                            colSpan={table.getAllLeafColumns().length}
                           >
-                            {rowData.clearanceName}{" "}
-                            <motion.div
-                              animate={{ rotate: isExpanded ? 0 : 180 }}
-                              transition={{ duration: 0.3 }}
-                            >
-                              <ChevronUp />
-                            </motion.div>
-                          </Text>
-                        </Table.Cell>
-                      </MotionTableRow>
-                      <MotionDivider
-                        initial={{ scaleX: 0 }}
-                        animate={{ scaleX: 1 }}
-                        transition={{ duration: 0.3 }}
-                      />
-                    </>
-                  )}
+                            <HStack justifyContent="space-between">
+                              <HStack>
+                                <Checkbox
+                                  bgColor={"whiteAlpha.950"}
+                                  checked={
+                                    isAllSelected
+                                      ? true
+                                      : isIndeterminate
+                                        ? "indeterminate"
+                                        : false
+                                  }
+                                  onCheckedChange={(e) =>
+                                    toggleClearanceRows(e.checked as boolean)
+                                  }
+                                />
+                                <Text
+                                  fontWeight="bold"
+                                  onClick={() =>
+                                    toggleClearance(rowData.clearanceName)
+                                  }
+                                >
+                                  {rowData.clearanceName}
+                                </Text>
+                              </HStack>
+                              <Button
+                                size="xs"
+                                variant="ghost"
+                                onClick={() =>
+                                  toggleClearance(rowData.clearanceName)
+                                }
+                              >
+                                {isExpanded ? "Collapse" : "Expand"}
+                                <ChevronUp
+                                  size={16}
+                                  style={{
+                                    transform: isExpanded
+                                      ? "rotate(180deg)"
+                                      : undefined,
+                                    transition: "transform 0.2s",
+                                  }}
+                                />
+                              </Button>
+                            </HStack>
+                          </Table.Cell>
+                        </MotionTableRow>
+                      );
+                    })()}
+
                   <AnimatePresence>
                     {isExpanded && (
                       <MotionTableRow
@@ -375,6 +477,9 @@ export default function ClearanceTable() {
                         animate={{ opacity: 1, height: "auto" }}
                         exit={{ opacity: 0, height: 0 }}
                         transition={{ duration: 0.3 }}
+                        bg={
+                          row.getIsSelected() ? selectedRowBgColor : undefined
+                        }
                       >
                         {row.getVisibleCells().map((cell) => (
                           <Table.Cell key={cell.id}>

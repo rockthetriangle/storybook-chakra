@@ -56,21 +56,24 @@ export default function ClearanceTable() {
   // Track if all sections are currently expanded or collapsed
   const [allExpanded, setAllExpanded] = useState(true);
 
-  const uniqueSchedules = [
-    ...new Set(data.map((item) => item.scheduleName)),
-  ];
-  
-  const uniqueElevators = [
-    ...new Set(
-      data.map((item) => item.elevatorName).filter(Boolean) as string[]
-    ),
-  ];
-  
+  const uniqueSchedules = useMemo(
+    () => Array.from(new Set(data.map((item) => item.scheduleName))),
+    [data]
+  );
+
+  const uniqueElevators = useMemo(
+    () =>
+      Array.from(
+        new Set(data.map((item) => item.elevatorName).filter(Boolean) as string[])
+      ),
+    [data]
+  );
+
   // Get unique clearance names for the expand/collapse all functionality
-  const uniqueClearances = [
-    ...new Set(data.map((item) => item.clearanceName)),
-  ];
-  
+  const uniqueClearances = useMemo(
+    () => Array.from(new Set(data.map((item) => item.clearanceName))),
+    [data]
+  );
 
   const toggleClearance = (clearanceName: string) => {
     setExpandedClearances((prev) => ({

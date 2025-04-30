@@ -28,12 +28,13 @@ import { Clearance, FilterElementProps } from "./types";
 import { Checkbox } from "@/components/atoms/Checkbox";
 import { ActionConfirmation } from "./ActionConfirmation";
 import { toast } from "react-toastify";
+import { Tooltip } from "@/components/atoms/tooltip";
+import { LuCircleHelp } from "react-icons/lu";
 // Create motion components for our animations
 const MotionBox = motion(Box);
 const MotionTableRow = motion(Table.Row);
 const MotionHStack = motion(HStack);
 const MotionTag = motion(Tag.Root);
-
 
 export default function ClearanceTable() {
   const [gray200, gray700, gray50, gray600] = useToken("colors", [
@@ -64,7 +65,9 @@ export default function ClearanceTable() {
   const uniqueElevators = useMemo(
     () =>
       Array.from(
-        new Set(data.map((item) => item.elevatorName).filter(Boolean) as string[])
+        new Set(
+          data.map((item) => item.elevatorName).filter(Boolean) as string[]
+        )
       ),
     [data]
   );
@@ -247,7 +250,6 @@ export default function ClearanceTable() {
     })();
   }, []);
 
-
   if (loading) {
     return <Text>Loading...</Text>;
   }
@@ -267,6 +269,16 @@ export default function ClearanceTable() {
         <HStack justifyContent="space-between" mb={4}>
           <Text fontSize="2xl" fontWeight="bold">
             Doors by Clearance
+            <Tooltip
+              showArrow
+              content={
+                "A clearance is an access permission. Doors are entry points that require the right clearance to open."
+              }
+            >
+              <Box display="inline-flex" ml={1} cursor="help">
+                <LuCircleHelp size={16} />
+              </Box>
+            </Tooltip>
           </Text>
 
           <motion.div

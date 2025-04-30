@@ -18,36 +18,22 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { Fragment, useMemo, useState } from "react";
+import { Fragment, useEffect, useMemo, useState } from "react";
 import { ChevronUp, Layers, Trash, Edit } from "react-feather";
 import { motion, AnimatePresence } from "framer-motion";
 import { ColumnFilter } from "./ColumnFilter";
 import { ColumnSorter } from "./ColumnSorter";
-import { CLEARANCE_DATA } from "./data";
+import { getActivityLogsData } from "./data";
 import { Clearance, FilterElementProps } from "./types";
 import { Checkbox } from "@/components/atoms/Checkbox";
 import { ActionConfirmation } from "./ActionConfirmation";
-
+import { toast } from "react-toastify";
 // Create motion components for our animations
 const MotionBox = motion(Box);
 const MotionTableRow = motion(Table.Row);
 const MotionHStack = motion(HStack);
 const MotionTag = motion(Tag.Root);
 
-const uniqueSchedules = [
-  ...new Set(CLEARANCE_DATA.map((item) => item.scheduleName)),
-];
-
-const uniqueElevators = [
-  ...new Set(
-    CLEARANCE_DATA.map((item) => item.elevatorName).filter(Boolean) as string[]
-  ),
-];
-
-// Get unique clearance names for the expand/collapse all functionality
-const uniqueClearances = [
-  ...new Set(CLEARANCE_DATA.map((item) => item.clearanceName)),
-];
 
 export default function ClearanceTable() {
   const [gray200, gray700, gray50, gray600] = useToken("colors", [
@@ -59,7 +45,8 @@ export default function ClearanceTable() {
   const clearanceBgColor = useColorModeValue(gray200, gray700);
   const selectedRowBgColor = useColorModeValue(gray50, gray600);
   const clearanceColor = useColorModeValue(gray700, gray200);
-  const data = useMemo(() => CLEARANCE_DATA, []);
+  const [data, setData] = useState<Clearance[]>([]);
+  const [loading, setLoading] = useState(true);
 
   const [expandedClearances, setExpandedClearances] = useState<
     Record<string, boolean>
@@ -68,6 +55,22 @@ export default function ClearanceTable() {
 
   // Track if all sections are currently expanded or collapsed
   const [allExpanded, setAllExpanded] = useState(true);
+
+  const uniqueSchedules = [
+    ...new Set(data.map((item) => item.scheduleName)),
+  ];
+  
+  const uniqueElevators = [
+    ...new Set(
+      data.map((item) => item.elevatorName).filter(Boolean) as string[]
+    ),
+  ];
+  
+  // Get unique clearance names for the expand/collapse all functionality
+  const uniqueClearances = [
+    ...new Set(data.map((item) => item.clearanceName)),
+  ];
+  
 
   const toggleClearance = (clearanceName: string) => {
     setExpandedClearances((prev) => ({
@@ -225,6 +228,26 @@ export default function ClearanceTable() {
     // Implement your assign logic here
     table.toggleAllRowsSelected(false); // Deselect rows after action
   };
+
+  useEffect(() => {
+    (async () => {
+      try {
+        setLoading(true);
+        const activityLogs = await getActivityLogsData();
+        console.log(activityLogs);
+        setData(activityLogs);
+      } catch (error) {
+        toast.error("Failed to fetch data");
+      } finally {
+        setLoading(false);
+      }
+    })();
+  }, []);
+
+
+  if (loading) {
+    return <Text>Loading...</Text>;
+  }
 
   return (
     <MotionBox

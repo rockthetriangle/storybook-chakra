@@ -480,8 +480,22 @@ export default function ClearanceTable() {
                                   onClick={() =>
                                     toggleClearance(rowData.clearanceName)
                                   }
+                                  display={"flex"}
+                                  alignItems={"center"}
                                 >
                                   {rowData.clearanceName}
+                                  <Tooltip
+                                    showArrow
+                                    content={rowData.clearanceName}
+                                  >
+                                    <Box
+                                      display="inline-flex"
+                                      ml={1}
+                                      cursor="help"
+                                    >
+                                      <LuCircleHelp size={16} />
+                                    </Box>
+                                  </Tooltip>
                                 </Text>
                               </HStack>
                               <Button

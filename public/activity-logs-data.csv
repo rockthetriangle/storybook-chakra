@@ -1,0 +1,201 @@
+Clearance_Name,DoorName2,ElevatorName,ScheduleName
+TSU-Bookstore 10am-4pm-DEPT,TSU-01-1137-Catering Production Vestibule Entry-DEPT,,TSU-Bookstore 10am-4pm
+TSU-Bookstore 10am-4pm-DEPT,TSU-01-1235A-Shipping and Receiving Main Entry-DEPT,,TSU-Bookstore 10am-4pm
+TSU-Bookstore 10am-4pm-DEPT,TSU-01-1250-Employee Lounge Exit-DEPT,,TSU-Bookstore 10am-4pm
+TSU-Bookstore 10am-4pm-DEPT,TSU-01-1293-Northeast Stair-DEPT,,TSU-Bookstore 10am-4pm
+TSU-Bookstore 10am-4pm-DEPT,TSU-01-E1150A-Loading Dock Man Door Entrance-DEPT,,TSU-Bookstore 10am-4pm
+TSU-Bookstore 10am-4pm-DEPT,TSU-01-E1150A-Loading Dock Man Door Entrance-DEPT,,TSU-Bookstore 10am-4pm
+TSU-Bookstore 10am-4pm-DEPT,TSU-01-E1150B-Loading Dock Roll Up Door-DEPT,,TSU-Bookstore 10am-4pm
+TSU-Bookstore 10am-4pm-DEPT,TSU-01-E1150B-Loading Dock Roll Up Door-DEPT,,TSU-Bookstore 10am-4pm
+TSU-Bookstore 10am-4pm-DEPT,TSU-01-E1200-Starbucks Entry ADA-DEPT,,TSU-Bookstore 10am-4pm
+TSU-Bookstore 10am-4pm-DEPT,TSU-02-2239AB-Bookstore Back Entry-DEPT,,TSU-Bookstore 10am-4pm
+TSU-Bookstore 10am-4pm-DEPT,TSU-02-E2142-Far East High Ceiling Pavilion ADA-DEPT,,TSU-Bookstore 10am-4pm
+TSU-Bookstore 10am-4pm-DEPT,TSU-02-E2200AB-South Main Entrance-DEPT,,TSU-Bookstore 10am-4pm
+TSU-Bookstore 10am-4pm-DEPT,TSU-02-E2200AC-South Main Entrance-DEPT,,TSU-Bookstore 10am-4pm
+TSU-Bookstore 10am-4pm-DEPT,TSU-02-E2251B-East Lobby Entry-DEPT,,TSU-Bookstore 10am-4pm
+TSU-Bookstore 10am-4pm-DEPT,TSU-02-E2251B-East Lobby Entry-DEPT,,TSU-Bookstore 10am-4pm
+TSU-Bookstore 10am-4pm-DEPT,TSU-04-4221-Copy and Supply Room-DEPT,,TSU-Bookstore 10am-4pm
+TSU-Bookstore 10am-4pm-DEPT,TSU-G-NA-Man Gate-DEPT,,TSU-Bookstore 10am-4pm
+TSU-Bookstore 10am-4pm-DEPT,TSU-G-NA-Traffic Gate-DEPT,,TSU-Bookstore 10am-4pm
+TSU-Bookstore Concessions-DEPT,TSU-01-1137-Catering Production Vestibule Entry-DEPT,,Always
+TSU-Bookstore Concessions-DEPT,TSU-01-1195-West Stair 1198-DEPT,,Always
+TSU-Bookstore Concessions-DEPT,TSU-01-1293-Northeast Stair-DEPT,,Always
+TSU-Bookstore Concessions-DEPT,TSU-01-E1150A-Loading Dock Man Door Entrance-DEPT,,Always
+TSU-Bookstore Concessions-DEPT,TSU-01-E1150A-Loading Dock Man Door Entrance-DEPT,,Always
+TSU-Bookstore Concessions-DEPT,TSU-01-E1150B-Loading Dock Roll Up Door-DEPT,,Always
+TSU-Bookstore Concessions-DEPT,TSU-01-E1150B-Loading Dock Roll Up Door-DEPT,,Always
+TSU-Bookstore Concessions-DEPT,TSU-01-E1172-Loading Dock Storage Entry-DEPT,,Always
+TSU-Bookstore Concessions-DEPT,TSU-02-E2142-Far East High Ceiling Pavilion ADA-DEPT,,Always
+TSU-Bookstore Concessions-DEPT,TSU-02-E2200AB-South Main Entrance-DEPT,,Always
+TSU-Bookstore Concessions-DEPT,TSU-02-E2200AC-South Main Entrance-DEPT,,Always
+TSU-Bookstore Concessions-DEPT,TSU-02-E2251B-East Lobby Entry-DEPT,,Always
+TSU-Bookstore Concessions-DEPT,TSU-02-E2293-Northeast Stair Exit-DEPT,,Always
+TSU-Bookstore Concessions-DEPT,TSU-G-NA-Man Gate-DEPT,,Always
+TSU-Bookstore Concessions-DEPT,TSU-G-NA-Traffic Gate-DEPT,,Always
+TSU-Bookstore Limited Staff-DEPT,TSU-01-E1150A-Loading Dock Man Door Entrance-DEPT,,Always
+TSU-Bookstore Limited Staff-DEPT,TSU-01-E1150B-Loading Dock Roll Up Door-DEPT,,Always
+TSU-Bookstore Limited Staff-DEPT,TSU-02-2239AB-Bookstore Back Entry-DEPT,,Always
+TSU-Bookstore Limited Staff-DEPT,TSU-02-E2142-Far East High Ceiling Pavilion ADA-DEPT,,Always
+TSU-Bookstore Limited Staff-DEPT,TSU-02-E2200AB-South Main Entrance-DEPT,,Always
+TSU-Bookstore Limited Staff-DEPT,TSU-02-E2200AC-South Main Entrance-DEPT,,Always
+TSU-Bookstore Limited Staff-DEPT,TSU-02-E2251B-East Lobby Entry-DEPT,,Always
+TSU-Bookstore Shipping/Receiving-DEPT,TSU-01-1235A-Shipping and Receiving Main Entry-DEPT,,Always
+TSU-Bookstore Shipping/Receiving-DEPT,TSU-01-E1150A-Loading Dock Man Door Entrance-DEPT,,TSU - 7am-4pm Access
+TSU-Bookstore Shipping/Receiving-DEPT,TSU-01-E1150B-Loading Dock Roll Up Door-DEPT,,TSU - 7am-4pm Access
+TSU-Bookstore-DEPT,,TSU - Elevator Car Four (4),Always
+TSU-Bookstore-DEPT,TSU-01-1235A-Shipping and Receiving Main Entry-DEPT,,Always
+TSU-Bookstore-DEPT,TSU-01-1250-Employee Lounge Exit-DEPT,,Always
+TSU-Bookstore-DEPT,TSU-01-1293-Northeast Stair-DEPT,,Always
+TSU-Bookstore-DEPT,TSU-01-E1150A-Loading Dock Man Door Entrance-DEPT,,Always
+TSU-Bookstore-DEPT,TSU-01-E1150A-Loading Dock Man Door Entrance-DEPT,,Always
+TSU-Bookstore-DEPT,TSU-01-E1150B-Loading Dock Roll Up Door-DEPT,,Always
+TSU-Bookstore-DEPT,TSU-01-E1150B-Loading Dock Roll Up Door-DEPT,,Always
+TSU-Bookstore-DEPT,TSU-01-E1200-Starbucks Entry ADA-DEPT,,Always
+TSU-Bookstore-DEPT,TSU-02-2239AB-Bookstore Back Entry-DEPT,,Always
+TSU-Bookstore-DEPT,TSU-02-E2142-Far East High Ceiling Pavilion ADA-DEPT,,Always
+TSU-Bookstore-DEPT,TSU-02-E2200AB-South Main Entrance-DEPT,,Always
+TSU-Bookstore-DEPT,TSU-02-E2200AC-South Main Entrance-DEPT,,Always
+TSU-Bookstore-DEPT,TSU-02-E2251B-East Lobby Entry-DEPT,,Always
+TSU-Bookstore-DEPT,TSU-02-E2251B-East Lobby Entry-DEPT,,Always
+TSU-Bookstore-DEPT,TSU-04-4221-Copy and Supply Room-DEPT,,Always
+TSU-Bookstore-DEPT,TSU-G-NA-Man Gate-DEPT,,Always
+TSU-Bookstore-DEPT,TSU-G-NA-Traffic Gate-DEPT,,Always
+TSU-Student Centers Administration-DEPT,,TSU - Elevator Car Four (4),Always
+TSU-Student Centers Administration-DEPT,,TSU - Elevator Car Four (4),Always
+TSU-Student Centers Administration-DEPT,,TSU - Elevator Car Four (4),Always
+TSU-Student Centers Administration-DEPT,,TSU - Elevator Car Four (4),Always
+TSU-Student Centers Administration-DEPT,,TSU-01-1198-Elevator Car Three-ELEV,Always
+TSU-Student Centers Administration-DEPT,,TSU-01-1198-Elevator Car Three-ELEV,Always
+TSU-Student Centers Administration-DEPT,,TSU-01-1198-Elevator Car Three-ELEV,Always
+TSU-Student Centers Administration-DEPT,,TSU-01-1198-Elevator Car Three-ELEV,Always
+TSU-Student Centers Administration-DEPT,,TSU-01-1198-Elevator Car Three-ELEV,Always
+TSU-Student Centers Administration-DEPT,,TSU-01-1199-Elevator Car Two-ELEV,Always
+TSU-Student Centers Administration-DEPT,,TSU-01-1199-Elevator Car Two-ELEV,Always
+TSU-Student Centers Administration-DEPT,,TSU-01-1199-Elevator Car Two-ELEV,Always
+TSU-Student Centers Administration-DEPT,,TSU-01-1199-Elevator Car Two-ELEV,Always
+TSU-Student Centers Administration-DEPT,,TSU-01-1199-Elevator Car Two-ELEV,Always
+TSU-Student Centers Administration-DEPT,,TSU-01-2197-Elevator Car One-ELEV,Always
+TSU-Student Centers Administration-DEPT,,TSU-01-2197-Elevator Car One-ELEV,Always
+TSU-Student Centers Administration-DEPT,,TSU-01-2197-Elevator Car One-ELEV,Always
+TSU-Student Centers Administration-DEPT,,TSU-01-2197-Elevator Car One-ELEV,Always
+TSU-Student Centers Administration-DEPT,,TSU-01-2197-Elevator Car One-ELEV,Always
+TSU-Student Centers Administration-DEPT,,TSU-01-2197-Elevator Car One-ELEV,Always
+TSU-Student Centers Administration-DEPT,TSU-01-1100-South Corridor 1150-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-01-1136-Mechanical Room Exit-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-01-1137-Catering Production Vestibule Entry-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-01-1195-West Stair 1198-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-01-1235A-Shipping and Receiving Main Entry-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-01-1250-Employee Lounge Exit-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-01-1258-Catering Storage-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-01-1263-Hall Freezer-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-01-1264A-Main Kitchen S. Entry-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-01-1264B-Main Kitchen E Entry-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-01-1293-Northeast Stair-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-01-E1136-Loading Dock Mechanical-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-01-E1150A-Loading Dock Man Door Entrance-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-01-E1150B-Loading Dock Roll Up Door-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-01-E1172-Loading Dock Storage Entry-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-01-E1200-Starbucks Entry ADA-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-01-E1201A-Starbucks Rear Entrance (E1155)-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-01-E1201-Starbucks Side Exit-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-02-2100A-Theater Administration Hallway Entrance-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-02-2102-Green Room Entrance-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-02-2108A-Meeting Room-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-02-2108-Theater Hallway Circulation-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-02-2110-University Theater Administration-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-02-2121-Campus Visits Main Entrance-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-02-2121F-Campus Visits Rear Entrance-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-02-2123C-Suite 2123 Rear Entrance-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-02-2123-Passport Services-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-02-2125A-Wolfcard Services North Entrance Slider-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-02-2125F-Wolfcard Services Rear Entrance-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-02-2125-Wolfcard Services South Entrance-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-02-2129-Lobby Storage-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-02-2131D-Student Operations Center-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-02-2133A-Talley Retail Offices Hallway Entrance-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-02-2143AA-CStore Back Door-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-02-2143-Market Entry-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-02-2175-Cafe Front Entry-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-02-2181BA-Cafe Rear Entry-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-02-2210A-Bookstore Slider West-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-02-2210B-Bookstore Slider North-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-02-2239AB-Bookstore Back Entry-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-02-2250B-PCJ Port City Java Entry-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-02-2260-Main Entry-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-02-2270-Food Service Queuing-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-02-2272A-Kitchen Support South Entry-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-02-2280-Kitchen Support North Entry-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-02-2296-Car Seven Hall Call-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-02-E2100-Theater Main Entrance-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-02-E2105B-Stewart Theater Rear Entrance-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-02-E2105C-Stewart Theater Rear Entrance-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-02-E2142-Far East High Ceiling Pavilion ADA-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-02-E2152-Center R East High Ceiling Pavilion-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-02-E2160-Center Left NW Pavilion-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-02-E2170-Far West Pavilion-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-02-E2195-West Stair Exit-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-02-E2200AA-South Main Entrance-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-02-E2200AB-South Main Entrance-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-02-E2200AC-South Main Entrance-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-02-E2200BA-Courtyard Main Exit Sliding Door-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-02-E2200BB-Courtyard Main Exit-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-02-E2200BC-Courtyard Main Entry-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-02-E2214-Bookstore Employee Exit-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-02-E2251A-East Lobby Exit-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-02-E2251B-East Lobby Entry-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-02-E2271AB-NW Courtyard Exit-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-02-E2280-Dining East Exit-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-02-E2291-South East Stair Exit-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-02-E2292-East Stair (Bookstore) Exit-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-02-E2293-Northeast Stair Exit-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-02-E2294-North Stair Exit-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-02-E2295A-Northeast Stair Exit-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-02-E2295B-Northeast Stair Ent ADA-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-03-3140B-Arts & Development Entry-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-03-3195-West Stair Entry-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-03-3202A-Bistro 1887 Main Entrance-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-03-3202B-Bistro 1887 Staff Rear Entrance-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-03-3225-A/V Room-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-03-3248-Ticket Sales Booth Main Entrance-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-03-3266-Ballroom Support Entry-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-03-3274A-Catering Support North Entry-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-03-3274B-Catering Support East Entry-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-03-3284-Ballroom Circulation Entry-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-03-E3100A-South Terrace Entrance-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-03-E3100B-South Terrace Exit-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-03-E3195-Roof Access-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-03-E3265-Balcony Exit-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-04-4111A-Storage Room-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-04-4111B-CSLEPS South Entrance-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-04-4127-Storage Room-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-04-4195-West Stair Entry-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-04-4210A-Woodward Student Center Rear Entrance-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-04-4210B-Woodward Student Center Main Entrance-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-04-4213-RED 1-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-04-4221-Copy and Supply Room-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-04-4237A-Woodward Student Center Conference Room Entrance-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-04-4240-SLE Storage Room-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-04-4245A-Student Government Conference Room Entrance-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-04-4251-Student Government Center Main Entrance-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-04-4261-Multicultural Center Main Entrance-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-04-4286-Social Lounge Entry ADA-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-04-4289B-Mechanical Room Entry-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-04-4294B-Service Corridor Entry-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-04-E4132W-Roof Access Window-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-05-5107-Administration Suite South-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-05-5125A-Suite Main Entrance-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-05-5130-Security Room Entry-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-05-5160-Mechanical Room Entry-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-05-5195-West Stair Entry-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-05-5210-Womens Center Main Entrance-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-05-5230-Pride Center Main Entrance-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-05-5261-FSL Main Entrance-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-05-E5145-Roof Access-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-05-E5293-Roof Access Entry-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-05-ES08-Roof Access Window-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-06-E6210A-Penthouse N Door In/Out To Roof-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-06-E6210B?-Penthouse Door-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-06-E6210C-Penthouse S Double Doors In/Out To Roof-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-G-NA-Man Gate-DEPT,,Always
+TSU-Student Centers Administration-DEPT,TSU-G-NA-Traffic Gate-DEPT,,Always
+

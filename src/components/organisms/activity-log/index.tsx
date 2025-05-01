@@ -46,6 +46,7 @@ export default function ClearanceTable() {
   const clearanceBgColor = useColorModeValue(gray200, gray700);
   const selectedRowBgColor = useColorModeValue(gray50, gray600);
   const clearanceColor = useColorModeValue(gray700, gray200);
+  const checkboxColorPalette = "red";
   const [data, setData] = useState<Clearance[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -104,6 +105,7 @@ export default function ClearanceTable() {
         id: "select",
         header: ({ table }) => (
           <Checkbox
+          colorPalette={checkboxColorPalette}
             checked={
               table.getIsSomePageRowsSelected()
                 ? "indeterminate"
@@ -114,6 +116,7 @@ export default function ClearanceTable() {
         ),
         cell: ({ row }) => (
           <Checkbox
+          colorPalette={checkboxColorPalette}
             checked={row.getIsSelected()}
             onChange={row.getToggleSelectedHandler()}
           />
@@ -463,7 +466,7 @@ export default function ClearanceTable() {
                             <HStack justifyContent="space-between">
                               <HStack>
                                 <Checkbox
-                                  bgColor={"whiteAlpha.950"}
+                                  colorPalette={checkboxColorPalette}
                                   checked={
                                     isAllSelected
                                       ? true

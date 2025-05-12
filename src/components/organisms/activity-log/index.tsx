@@ -105,7 +105,7 @@ export default function ClearanceTable() {
         id: "select",
         header: ({ table }) => (
           <Checkbox
-          colorPalette={checkboxColorPalette}
+            colorPalette={checkboxColorPalette}
             checked={
               table.getIsSomePageRowsSelected()
                 ? "indeterminate"
@@ -116,7 +116,7 @@ export default function ClearanceTable() {
         ),
         cell: ({ row }) => (
           <Checkbox
-          colorPalette={checkboxColorPalette}
+            colorPalette={checkboxColorPalette}
             checked={row.getIsSelected()}
             onChange={row.getToggleSelectedHandler()}
           />
@@ -185,7 +185,7 @@ export default function ClearanceTable() {
         ),
       },
     ],
-    []
+    [uniqueSchedules, uniqueElevators]
   );
 
   const table = useReactTable({

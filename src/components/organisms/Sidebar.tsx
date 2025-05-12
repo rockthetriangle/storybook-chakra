@@ -7,15 +7,19 @@ import {
   Separator,
   Text,
   VStack,
+  Collapsible,
 } from "@chakra-ui/react";
 import {
   FiBook,
+  FiChevronDown,
+  FiChevronUp,
   FiFileText,
   FiHome,
   FiLogOut,
   FiSettings,
   FiUser,
 } from "react-icons/fi";
+import { useState } from "react";
 import { WolfIcon } from "../atoms/icon/Icons";
 import MenuItem from "../molecules/MenuItem";
 import { useColorModeValue } from "../molecules/color-mode";
@@ -26,6 +30,9 @@ interface SidebarProps extends BoxProps {
 }
 
 const Sidebar = ({ onClose, ...rest }: SidebarProps) => {
+  const [isPageOneOpen, setPageOneOpen] = useState(false);
+  const [isPageTwoOpen, setPageTwoOpen] = useState(false);
+
   const bgColor = useColorModeValue("white", "blue.700");
   const borderColor = useColorModeValue("gray.200", "gray.700");
   const helpSectionBg = useColorModeValue("gray.50", "gray.700");
@@ -54,7 +61,8 @@ const Sidebar = ({ onClose, ...rest }: SidebarProps) => {
           </Text>
         </Flex>
       </Flex>
-      <Box mb={4} mx={8} >
+
+      <Box mb={4} mx={8}>
         <ColorModeButtonExtended variant="line" size="lg" />
       </Box>
 
@@ -62,12 +70,46 @@ const Sidebar = ({ onClose, ...rest }: SidebarProps) => {
         <MenuItem icon={FiHome} isActive href="/">
           Home
         </MenuItem>
-        <MenuItem icon={FiFileText} href="/page-one">
-          Page One
-        </MenuItem>
-        <MenuItem icon={FiFileText} href="/page-two">
-          Page Two
-        </MenuItem>
+
+        <Collapsible.Root>
+          <Collapsible.Trigger asChild>
+            <MenuItem
+              icon={FiChevronRightIcon(isPageOneOpen)}
+              onClick={() => setPageOneOpen((prev) => !prev)}
+            >
+              Page One
+            </MenuItem>
+          </Collapsible.Trigger>
+          <Collapsible.Content>
+            <VStack pl={8} align="stretch">
+              <MenuItem href="/page-one/subpage-one" icon={FiHome}>
+                Subpage One
+              </MenuItem>
+              <MenuItem href="/page-one/subpage-two" icon={FiHome}>
+                Subpage Two
+              </MenuItem>
+            </VStack>
+          </Collapsible.Content>
+        </Collapsible.Root>
+
+        <Collapsible.Root>
+          <Collapsible.Trigger asChild>
+            <MenuItem
+              icon={FiChevronRightIcon(isPageTwoOpen)}
+              onClick={() => setPageTwoOpen((prev) => !prev)}
+            >
+              Page Two
+            </MenuItem>
+          </Collapsible.Trigger>
+          <Collapsible.Content>
+            <VStack pl={8} align="stretch">
+              <MenuItem icon={FiFileText}>Subpage One</MenuItem>
+              <MenuItem href="/page-two/subpage-two" icon={FiFileText}>
+                Subpage Two
+              </MenuItem>
+            </VStack>
+          </Collapsible.Content>
+        </Collapsible.Root>
 
         <Separator />
 
@@ -115,5 +157,9 @@ const Sidebar = ({ onClose, ...rest }: SidebarProps) => {
     </Box>
   );
 };
+
+// Helper: Right arrow icon to indicate sub-items
+const FiChevronRightIcon = (isOpen: boolean) =>
+  isOpen ? FiChevronUp : FiChevronDown;
 
 export default Sidebar;

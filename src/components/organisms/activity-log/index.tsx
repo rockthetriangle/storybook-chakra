@@ -46,6 +46,7 @@ export default function ClearanceTable() {
   const clearanceBgColor = useColorModeValue(gray200, gray700);
   const selectedRowBgColor = useColorModeValue(gray50, gray600);
   const clearanceColor = useColorModeValue(gray700, gray200);
+  const checkboxColorPalette = "red";
   const [data, setData] = useState<Clearance[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -104,6 +105,7 @@ export default function ClearanceTable() {
         id: "select",
         header: ({ table }) => (
           <Checkbox
+            colorPalette={checkboxColorPalette}
             checked={
               table.getIsSomePageRowsSelected()
                 ? "indeterminate"
@@ -114,6 +116,7 @@ export default function ClearanceTable() {
         ),
         cell: ({ row }) => (
           <Checkbox
+            colorPalette={checkboxColorPalette}
             checked={row.getIsSelected()}
             onChange={row.getToggleSelectedHandler()}
           />
@@ -182,7 +185,7 @@ export default function ClearanceTable() {
         ),
       },
     ],
-    []
+    [uniqueSchedules, uniqueElevators]
   );
 
   const table = useReactTable({
@@ -262,8 +265,8 @@ export default function ClearanceTable() {
       transition={{ duration: 0.5 }}
     >
       <motion.div
-        initial={{ y: -20, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
       >
         <HStack justifyContent="space-between" mb={4}>
@@ -302,8 +305,8 @@ export default function ClearanceTable() {
       {/* Search and Actions Bar */}
       <HStack justifyContent="space-between" mb={4} alignItems="center">
         <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
           <Input
@@ -357,8 +360,8 @@ export default function ClearanceTable() {
           gap={2}
           mb={4}
           flexWrap="wrap"
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
           transition={{ duration: 0.3 }}
         >
           <Text fontWeight="bold">Applied Filters:</Text>
@@ -463,7 +466,7 @@ export default function ClearanceTable() {
                             <HStack justifyContent="space-between">
                               <HStack>
                                 <Checkbox
-                                  bgColor={"whiteAlpha.950"}
+                                  colorPalette={checkboxColorPalette}
                                   checked={
                                     isAllSelected
                                       ? true

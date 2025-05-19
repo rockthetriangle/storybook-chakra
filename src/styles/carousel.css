@@ -1,0 +1,8 @@
+.fade-carousel {
+  z-index: 1;
+  height: 100%;
+}
+
+.carousel.carousel-slider, .slider-wrapper, .slider {
+    height: 100% !important;
+}

@@ -4,8 +4,14 @@ import { Box, Container, Flex, Link, Text } from "@chakra-ui/react";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "../../styles/carousel.css";
+import { useMemo } from "react";
 const AuthPage = () => {
   const accentColor = "red.200";
+  const imageCount = 5;
+  const randomStartIndex = useMemo(
+    () => Math.floor(Math.random() * imageCount),
+    []
+  );
 
   return (
     <Flex minH="100vh" w="full">
@@ -59,6 +65,7 @@ const AuthPage = () => {
           infiniteLoop
           autoPlay
           animationHandler="fade"
+          selectedItem={randomStartIndex}
           className="fade-carousel"
         >
           {[1, 2, 3, 4, 5].map((index) => (
